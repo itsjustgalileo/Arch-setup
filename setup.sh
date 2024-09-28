@@ -1,7 +1,7 @@
 #! /bin/sh
 
 echo "Downloading packages"
-sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils xorg-server xorg-xinit xwallpaper xclip pcmanfm clipmenu llvm lldb wine mingw-w64 clang cmake ninja emacs python3 mesa mesa-utils valgrind libglvnd vulkan-icd-loader vulkan-intel vulkan-tools i3-wm i3status dmenu ttf-ibm-plex htop acpi unzip zip openssh rsync gdb qemu-full libvirt virt-manager dnsmasq bridge-utils chromium picom nasm
+sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xwallpaper xclip pcmanfm clipmenu llvm lldb wine mingw-w64 clang cmake ninja emacs python3 mesa mesa-utils valgrind libglvnd vulkan-icd-loader vulkan-intel vulkan-tools i3-wm i3status dmenu ttf-ibm-plex htop acpi unzip zip openssh rsync gdb qemu-full libvirt virt-manager dnsmasq bridge-utils chromium picom nasm
 
 echo "Setting the shell to zsh"
 chsh -s /bin/zsh
