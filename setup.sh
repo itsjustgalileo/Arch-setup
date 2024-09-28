@@ -1,5 +1,7 @@
 #! /bin/sh
 
+set -e
+
 echo "pacman: Downloading packages"
 sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr xwallpaper xclip pcmanfm vifm clipmenu tree vim emacs llvm clang wine mingw-w64 lldb gdb cmake ninja python3 python-pip mesa mesa-utils valgrind libglvnd vulkan-icd-loader vulkan-intel vulkan-tools i3-wm i3status dmenu ttf-ibm-plex htop acpi unzip zip openssh rsync qemu-full libvirt virt-manager dnsmasq bridge-utils chromium picom nasm jdk11-openjdk rustc cargo go
 
