@@ -1,7 +1,7 @@
 #! /bin/sh
 
 echo "Downloading packages"
-sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr xwallpaper xclip pcmanfm vifm clipmenu emacs llvm clang wine mingw-w64 lldb gdb cmake ninja python3 mesa mesa-utils valgrind libglvnd vulkan-icd-loader vulkan-intel vulkan-tools i3-wm i3status dmenu ttf-ibm-plex htop acpi unzip zip openssh rsync qemu-full libvirt virt-manager dnsmasq bridge-utils chromium picom nasm
+sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr xwallpaper xclip pcmanfm vifm clipmenu tree emacs llvm clang wine mingw-w64 lldb gdb cmake ninja python3 mesa mesa-utils valgrind libglvnd vulkan-icd-loader vulkan-intel vulkan-tools i3-wm i3status dmenu ttf-ibm-plex htop acpi unzip zip openssh rsync qemu-full libvirt virt-manager dnsmasq bridge-utils chromium picom nasm
 
 echo "Setting the shell to zsh"
 chsh -s /bin/zsh
@@ -35,8 +35,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 # NVM node installation reminder
 echo "System about to reboot to apply changes"
-echo "Don't forget to run nvm after reboot: "
+echo "Don't forget after reboot to: "
 echo "nvm install node && nvm use node"
+echo "gh auth login"
 
 # Restarting system
 echo "Rebooting system"
