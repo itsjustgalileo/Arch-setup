@@ -54,3 +54,5 @@ echo "Post-install: Upgrading system packages"
 sudo pacman -Syu
 
 echo "Post-install: Script finished"
+
+rm -rf setup.sh post-install.sh
