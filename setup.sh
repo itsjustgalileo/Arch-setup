@@ -3,7 +3,7 @@
 set -e
 
 echo "pacman: Downloading packages"
-sudo pacman -S zsh tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython nasm jdk11-openjdk rustup go wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex terminus-font htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils rsync xclip tree shellcheck chromium chromium-widevine docker docker-compose
+sudo pacman -Syyu zsh tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython nasm jdk11-openjdk rustup go wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex terminus-font htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils rsync xclip tree shellcheck chromium chromium-widevine docker docker-compose
 
 echo "zsh: Setting the shell to zsh"
 chsh -s /bin/zsh
