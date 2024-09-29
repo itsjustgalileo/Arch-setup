@@ -67,6 +67,8 @@ echo -e "${GREEN}Post-install: Enabling Docker and libvirt services${NC}"
 sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
 
+echo -e "${GREEN}Post-install: Running emacs to load config${NC}"
+
 echo -e "${GREEN}Post-install: Script finished${NC}"
 
 # Clean up
