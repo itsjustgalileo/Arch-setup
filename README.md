@@ -22,10 +22,10 @@ This assumes you have already installed [Arch Linux x86_64](https://archlinux.or
 - vi (or any text editor)
 - man-db (optional)
 - man-pages (optional)
-- sudo systemctl restart systemd-binfmt
 
 *Instructions*
 ```sh
+# After installing linux, connect to internet and run:
 curl -O https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/setup.sh
 chmod +x setup.sh
 ./setup.sh
