@@ -68,10 +68,11 @@ chmod +x ./post-install.sh
 
 # Post installation reminder
 echo "System about to reboot to apply changes"
-echo "Don't forget after reboot to run the post-install script by running: "
+echo "Don't forget to run the post-install script after reboot by running: "
 echo "./post-install.sh"
 
 # Giving user time to read the reminder
+echo "..."
 sleep 5
 
 # Restarting system
