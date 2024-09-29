@@ -59,4 +59,5 @@ echo "Post-install: Script finished"
 
 rm -rf ~/setup.sh ~/post-install.sh
 
-source ~/.zshrc
+sudo systemctl enable --now docker
+sudo systemctl enable --now libvirtd
