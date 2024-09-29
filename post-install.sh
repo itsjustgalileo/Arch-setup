@@ -5,6 +5,14 @@ set -e
 
 echo "Post-install: Setting up environment"
 
+# dotfiles setup
+echo "st: Downloading dotfiles"
+git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
+
+echo "dotfiles: Deploying dotfiles"
+chmod +x ~/code/dotfiles/deploy.sh
+~/code/dotfiles/deploy.sh
+
 # Ensure NVM is loaded
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
     echo "Post-install: Loading NVM"
@@ -55,9 +63,8 @@ sudo pacman -Syu
 
 sudo systemctl restart systemd-binfmt
 
-echo "Running emacs to load config"
-emacs &
-
 echo "Post-install: Script finished"
 
 rm -rf ~/setup.sh ~/post-install.sh
+
+source ~/.zshrc
