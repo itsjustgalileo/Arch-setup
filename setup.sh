@@ -1,10 +1,9 @@
-cat << 'EOF' | bash
 #! /bin/sh
 
 set -e
 
 echo "pacman: Downloading packages"
-sudo pacman -Syyu --noconfirm zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip nasm jdk11-openjdk rustup cargo go wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex htop neofetch acpi unzip zip openssh rsync xclip tree chromium 
+sudo pacman -S zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip nasm jdk11-openjdk rustup cargo go wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex htop neofetch acpi unzip zip openssh rsync xclip tree chromium 
 
 echo "zsh: Setting the shell to zsh"
 chsh -s /bin/zsh
@@ -69,4 +68,3 @@ sleep 5
 
 echo "Rebooting system"
 reboot
-EOF
