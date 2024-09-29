@@ -20,7 +20,7 @@ git clone https://git.suckless.org/st ~/code/external/st
 echo "st: Building st"
 cd ~/code/external/st
 sudo make clean install
-
+# Going back home
 cd ~
 
 echo "st: Downloading dotfiles"
