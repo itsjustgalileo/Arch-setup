@@ -15,17 +15,19 @@ This assumes you have already installed [Arch Linux x86_64](https://archlinux.or
 - linux-firmware (required)
 - base (required)
 - base-devel (required)
+- networkmanager (required)
 - sof-firmware (required if new soundcard)
 - grub (or any bootloader)
 - efibootmgr (or any boot manager)
 - vi (or any text editor)
 - man-db (optional)
 - man-pages (optional)
+- sudo systemctl restart systemd-binfmt
 
 *Instructions*
 ```sh
 curl -O https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/setup.sh
-chmod +x ./setup.sh
+chmod +x setup.sh
 ./setup.sh
 
 # After reboot run:
