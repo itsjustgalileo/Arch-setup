@@ -1,9 +1,10 @@
+cat << 'EOF' | bash
 #! /bin/sh
 
 set -e
 
 echo "pacman: Downloading packages"
-sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip nasm jdk11-openjdk rustup cargo go wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex htop neofetch acpi unzip zip openssh rsync xclip tree chromium 
+sudo pacman -Syyu --noconfirm zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip nasm jdk11-openjdk rustup cargo go wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex htop neofetch acpi unzip zip openssh rsync xclip tree chromium 
 
 echo "zsh: Setting the shell to zsh"
 chsh -s /bin/zsh
@@ -15,7 +16,6 @@ mkdir -p code/external
 mkdir -p code/study
 
 echo "st: Downloading st"
-# Clone st from suckless repo
 git clone https://git.suckless.org/st ~/code/external/st
 
 echo "st: Building st"
@@ -23,15 +23,12 @@ cd ~/code/external/st
 sudo make clean install
 
 echo "st: Downloading dotfiles"
-# Clone dotfiles from your repository
 git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
 
-echo "dofiles: Deploying dotfiles"
-# Make deploy script executable and run it
+echo "dotfiles: Deploying dotfiles"
 chmod +x ~/code/dotfiles/deploy.sh
 ~/code/dotfiles/deploy.sh
 
-# Download vim setup https://github.com/amix/vimrc
 echo "Setting up VIM"
 echo "VIM: Cloning Ultimate vimrc"
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
@@ -50,31 +47,26 @@ echo "VIM: Setting up colorscheme"
 echo "colo phoenix" >> ~/.vim_runtime/my_configs.vim
 echo "PhoenixOrangeEighties" >> ~/.vim_runtime/my_configs.vim
 
-# Clone personal repos
 echo "Cloning bump repos"
 echo "bump: Cloning x-roulette"
 git clone https://github.com/itsjustgalileo/x-roulette ~/code/bump/x-roulette
 echo "bump: Cloning progen"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 
-# Download NVM
 echo "Downloading NVM"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-# Download post-install script
 echo "Downloading post-install script"
 curl -O https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/post-install.sh
 chmod +x ./post-install.sh
 
-# Post installation reminder
 echo "System about to reboot to apply changes"
 echo "Don't forget to run the post-install script after reboot by running: "
 echo "./post-install.sh"
 
-# Giving user time to read the reminder
 echo "..."
 sleep 5
 
-# Restarting system
 echo "Rebooting system"
 reboot
+EOF
