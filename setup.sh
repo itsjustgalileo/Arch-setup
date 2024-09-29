@@ -21,6 +21,8 @@ echo "st: Building st"
 cd ~/code/external/st
 sudo make clean install
 
+cd ~
+
 echo "st: Downloading dotfiles"
 git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
 
