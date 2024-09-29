@@ -42,7 +42,10 @@ echo "VIM: Downloading VIM phoenix theme"
 git clone https://github.com/widatama/vim-phoenix ~/.vim_runtime/my_plugins/vim-phoenix
 echo "VIM: Line number/relative line number"
 echo "set nu rnu" >> ~/.vim_runtime/my_configs.vim
-echo "inoremap jk <Esc>"
+echo "VIM: Remapping keys"
+echo "inoremap jk <Esc>" >> ~/.vim_runtime/my_configs.vim
+echo "VIM: Setting up NerdTree"
+echo "let g:NerdTreeWinPos = 'left'" >> ~/.vim_runtime/my_configs.vim
 echo "VIM: Setting up colorscheme"
 echo "colo phoenix" >> ~/.vim_runtime/my_configs.vim
 echo "PhoenixOrangeEighties" >> ~/.vim_runtime/my_configs.vim
