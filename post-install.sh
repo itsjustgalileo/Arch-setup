@@ -55,6 +55,9 @@ sudo pacman -Syu
 
 sudo systemctl restart systemd-binfmt
 
+echo "Running emacs to load config"
+emacs &
+
 echo "Post-install: Script finished"
 
 rm -rf ~/setup.sh ~/post-install.sh
