@@ -47,11 +47,13 @@ sudo pacman -U devkitpro-keyring.pkg.tar.xz
 echo "[dkp-libs]" | sudo tee -a /etc/pacman.conf
 echo "Server = https://pkg.devkitpro.org/packages" | sudo tee -a /etc/pacman.conf
 echo "[dkp-linux]" | sudo tee -a /etc/pacman.conf
-echo "Server = https://pkg.devkitpro.org/packages/linux/$arch" | sudo tee -a /etc/pacman.conf
+echo "Server = https://pkg.devkitpro.org/packages/linux/\$arch" | sudo tee -a /etc/pacman.conf
 rm -rf devkitpro-keyring.pkg.tar.xz
 # System upgrade (optional: upgrade system packages and data)
 echo "Post-install: Upgrading system packages"
 sudo pacman -Syu
+
+sudo systemctl restart systemd-binfmt
 
 echo "Post-install: Script finished"
 
