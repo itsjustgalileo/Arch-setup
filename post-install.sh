@@ -68,6 +68,7 @@ sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
 
 echo -e "${GREEN}Post-install: Running emacs to load config${NC}"
+emacs &
 
 echo -e "${GREEN}Post-install: Script finished${NC}"
 
