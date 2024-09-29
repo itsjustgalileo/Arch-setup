@@ -3,7 +3,7 @@
 set -e
 
 echo "pacman: Downloading packages"
-sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr xwallpaper xclip pcmanfm vifm clipmenu tree vim emacs llvm clang wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads lldb gdb cmake ninja python3 python-pip mesa mesa-utils valgrind libglvnd vulkan-icd-loader vulkan-intel vulkan-tools i3-wm i3status dmenu ttf-ibm-plex htop acpi unzip zip openssh rsync qemu-full libvirt virt-manager dnsmasq bridge-utils chromium picom nasm jdk11-openjdk rustup cargo go
+sudo pacman -Syyu zsh tmux wget git github-cli pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip nasm jdk11-openjdk rustup cargo go wine mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex htop neofetch acpi unzip zip openssh rsync xclip tree chromium 
 
 echo "zsh: Setting the shell to zsh"
 chsh -s /bin/zsh
@@ -61,11 +61,18 @@ git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 echo "Downloading NVM"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-# NVM node installation reminder
+# Download post-install script
+echo "Downloading post-install script"
+curl -O https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/post-install.sh
+chmod +x ./post-install.sh
+
+# Post installation reminder
 echo "System about to reboot to apply changes"
-echo "Don't forget after reboot to: "
-echo "nvm install node && nvm use node"
-echo "gh auth login"
+echo "Don't forget after reboot to run the post-install script by running: "
+echo "./post-install.sh"
+
+# Giving user time to read the reminder
+sleep 5
 
 # Restarting system
 echo "Rebooting system"
