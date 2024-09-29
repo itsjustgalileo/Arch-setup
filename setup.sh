@@ -23,13 +23,7 @@ sudo make clean install
 # Going back home
 cd ~
 
-echo "st: Downloading dotfiles"
-git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
-
-echo "dotfiles: Deploying dotfiles"
-chmod +x ~/code/dotfiles/deploy.sh
-~/code/dotfiles/deploy.sh
-
+# Setting up VIM
 echo "Setting up VIM"
 echo "VIM: Cloning Ultimate vimrc"
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
