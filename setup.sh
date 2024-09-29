@@ -56,7 +56,7 @@ chmod +x ~/post-install.sh
 
 echo "System about to reboot to apply changes"
 echo "Don't forget to run the post-install script after reboot by running: "
-echo "./post-install.sh"
+echo "~/post-install.sh"
 
 echo "..."
 sleep 5
