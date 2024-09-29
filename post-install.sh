@@ -55,9 +55,10 @@ sudo pacman -Syu
 
 sudo systemctl restart systemd-binfmt
 
-echo "Post-install: Script finished"
-
-rm -rf ~/setup.sh ~/post-install.sh
 
 sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
+
+echo "Post-install: Script finished"
+
+rm -rf ~/setup.sh ~/post-install.sh
