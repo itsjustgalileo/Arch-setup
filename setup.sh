@@ -58,8 +58,8 @@ echo "Downloading NVM"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 echo "Downloading post-install script"
-curl -O https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/post-install.sh
-chmod +x ./post-install.sh
+curl -o ~/post-install.sh https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/post-install.sh
+chmod +x ~/post-install.sh
 
 echo "System about to reboot to apply changes"
 echo "Don't forget to run the post-install script after reboot by running: "
