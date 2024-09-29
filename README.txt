@@ -26,6 +26,7 @@ This assumes you have already installed [Arch Linux x86_64](https://archlinux.or
 *Instructions*
 ```sh
 # After installing linux, connect to internet and run:
+# enter sudo password when prompted
 curl -O https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/setup.sh
 chmod +x setup.sh
 ./setup.sh
