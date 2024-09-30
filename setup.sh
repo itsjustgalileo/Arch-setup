@@ -6,7 +6,7 @@
 # pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware grub efibootmgr vi man-db man-pages zsh terminus-font
 # and the user was added with the flag `-s /bin/zsh`
 # some packages up here might not make sense in the
-# context of the setup, but they are just reminders to myself
+# context of the setup, but they are just reminders to myself.
 #! /bin/sh
 
 set -e
@@ -30,16 +30,6 @@ git clone https://git.suckless.org/st ~/code/external/st
 echo -e "${GREEN}st: Building st${NC}"
 cd ~/code/external/st
 sudo make clean install
-# Going back home
-cd ~
-
-echo -e "${GREEN}cc65: Downloading cc65 compiler toolchains${NC}"
-git clone https://github.com/cc65/cc65 ~/code/external/cc65
-
-echo -e "${GREEN}cc65: Building cc65${NC}"
-cd ~/code/external/cc65
-# building without install and not in sudo mode
-make
 # Going back home
 cd ~
 
@@ -76,8 +66,21 @@ git clone https://github.com/itsjustgalileo/x-roulette ~/code/bump/x-roulette
 echo -e "${GREEN}bump: Cloning progen${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 
-echo -e "${GREEN}Downloading NVM${NC}"
+echo -e "${GREEN}Downloading NVM for JS setup${NC}"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+echo -e "${GREEN}Downloading GHC up for Haskell setup${NC}"
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+echo -e "${GREEN}cc65: Downloading cc65 compiler toolchains${NC}"
+git clone https://github.com/cc65/cc65 ~/code/external/cc65
+
+echo -e "${GREEN}cc65: Building cc65${NC}"
+cd ~/code/external/cc65
+# building without install and not in sudo mode
+make
+# Going back home
+cd ~
 
 echo -e "${GREEN}Downloading post-install script${NC}"
 curl -o ~/post-install.sh https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/post-install.sh
