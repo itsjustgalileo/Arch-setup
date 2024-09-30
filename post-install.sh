@@ -69,11 +69,6 @@ git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/quest
 
-# Loading emacs config
-echo -e "${GREEN}[INFO] - Post-install: Running emacs to load config${NC}"
-echo -e "${GREEN}[INFO] - Post-install: Wait for emacs to finish loading and close it."
-emacs
-
 echo -e "${GREEN}[INFO] - Post-install: Script finished${NC}"
 
 # Clean up the post-install script once done

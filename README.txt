@@ -6,8 +6,6 @@ This is a simple shell script to setup any new machine to my specs.
 
 This uses [my personal dotfiles](https://github.com/itsjustgalileo/dotfiles).
 
-bg image is from [i.imgur.com/bLxcjh3.png](https://i.imgur.com/bLxcjh3.png)
-
 ---
 
 This assumes you have already installed [Arch Linux x86_64](https://archlinux.org/download/) (See [Arch install guide](https://wiki.archlinux.org/title/Installation_guide) for more):
