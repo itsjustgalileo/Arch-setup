@@ -6,7 +6,7 @@
 #! /bin/sh
 
 # Color definitions
-GREEN='\033[0;31m'     # Red
+RED='\033[0;31m'     # Red
 GREEN='\033[0;32m'     # Green
 ORANGE='\033[0;33m'    # Orange
 NC='\033[0m'           # No Color

@@ -1,5 +1,5 @@
 # \file install.sh
-# \brief Arch automated build script
+# \brief Arch/BlackArch automated build script
 # This script download and installs all necessary
 # tools to setup my devenv on any freshly installed 
 # Arch Linux machine assuming that Linux was pacstraped
@@ -7,18 +7,19 @@
 # pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware grub efibootmgr vi man-db man-pages zsh terminus-font
 # and the user was added with the flag `-s /bin/zsh`
 # some packages up here might not make sense in the
-# context of the setup, but they are just reminders to myself.
+# context of the setup, they are reminders to myself.
 #! /bin/sh
 
 set -e
 
 # Color definitions
+RED='\033[0;31m'     # Green
 GREEN='\033[0;32m'     # Green
 ORANGE='\033[0;33m'    # Orange
 NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
-sudo pacman -Syyu tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython nasm jdk11-openjdk rustup go gcc-fortran gcc-ada hoogle wine wine-mono mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils rsync mtools dosfstools xclip tree shellcheck chromium docker docker-compose
+sudo pacman -Syyu tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython pytest nasm jdk11-openjdk rustup go gcc-fortran gcc-ada hoogle wine wine-mono mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools blackman xclip tree shellcheck chromium docker docker-compose
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
@@ -71,6 +72,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 # Downloading Haskell tools
 echo -e "${GREEN}[INFO] - Downloading GHC up for Haskell setup${NC}"
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+echo -e "${GREEN}[INFO] - Downloading ghcid${NC}"
+cabal-update && cabal install ghcid
 
 # cc65 compiler toolchain for 65x cpu development
 echo -e "${GREEN}[INFO] - cc65: Downloading cc65 compiler toolchains${NC}"
