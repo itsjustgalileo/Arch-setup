@@ -90,7 +90,7 @@ echo -e "${ORANGE}~/post-install.sh${NC}"
 echo "..."
 sleep 5
 
-rm -rf setup.sh
+rm -rf ~/setup.sh
 
 echo -e "${ORANGE}Rebooting system...${NC}"
 reboot
