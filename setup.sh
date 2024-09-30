@@ -1,3 +1,12 @@
+# Arch automated build script
+# This script download and installs all necessary
+# tools to setup my devenv on any freshly installed 
+# Arch Linux machine assuming that Linux was pacstraped
+# with the following packages:
+# pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware grub efibootmgr vi man-db man-pages zsh terminus-font
+# and the user was added with the flag `-s /bin/zsh`
+# some packages up here might not make sense in the
+# context of the setup, but they are just reminders to myself
 #! /bin/sh
 
 set -e
@@ -8,10 +17,7 @@ ORANGE='\033[0;33m'    # Orange
 NC='\033[0m'           # No Color
 
 echo -e "${GREEN}pacman: Downloading packages${NC}"
-sudo pacman -Syyu zsh tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython nasm jdk11-openjdk rustup go gcc-fortran wine wine-mono mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils rsync mtools dosfstools xclip tree shellcheck chromium docker docker-compose
-
-echo -e "${GREEN}zsh: Setting the shell to zsh${NC}"
-chsh -s /bin/zsh
+sudo pacman -Syyu tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr i3-wm i3status dmenu xwallpaper picom pcmanfm vifm clipmenu vim emacs llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython nasm jdk11-openjdk rustup go gcc-fortran wine wine-mono mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils rsync mtools dosfstools xclip tree shellcheck chromium docker docker-compose
 
 echo -e "${GREEN}code: Making code directories${NC}"
 mkdir -p code/
@@ -24,6 +30,16 @@ git clone https://git.suckless.org/st ~/code/external/st
 echo -e "${GREEN}st: Building st${NC}"
 cd ~/code/external/st
 sudo make clean install
+# Going back home
+cd ~
+
+echo -e "${GREEN}cc65: Downloading cc65 compiler toolchains${NC}"
+git clone https://github.com/cc65/cc65 ~/code/external/cc65
+
+echo -e "${GREEN}cc65: Building cc65${NC}"
+cd ~/code/external/cc65
+# building without install and not in sudo mode
+make
 # Going back home
 cd ~
 
@@ -73,6 +89,8 @@ echo -e "${ORANGE}~/post-install.sh${NC}"
 
 echo "..."
 sleep 5
+
+rm -rf setup.sh
 
 echo -e "${ORANGE}Rebooting system...${NC}"
 reboot
