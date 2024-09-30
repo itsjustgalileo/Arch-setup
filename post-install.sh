@@ -1,3 +1,6 @@
+# This script should only exist on your fs
+# if it was downloaded via the setup.sh script
+# Do not run it if it was not!
 #! /bin/sh
 
 # Color definitions
@@ -45,21 +48,12 @@ else
 fi
 
 # Black Arch
-# Run https://blackarch.org/strap.sh as root and follow the instructions.
 echo -e "${GREEN}Running Black Arch Bootstrap${NC}"
 $ curl -O https://blackarch.org/strap.sh
 # Verify the SHA1 sum
-
 $ echo 26849980b35a42e6e192c6d9ed8c46f0d6d06047 strap.sh | sha1sum -c
-
-# Set execute bit
 chmod +x strap.sh
-
-# Run strap.sh
 sudo ./strap.sh
-
-# Enable multilib following https://wiki.archlinux.org/index.php/Official_repositories#Enabling_multilib and run:
-sudo pacman -Syu
 
 # DevKitPro setup
 echo -e "${GREEN}Post-install: Setting up DevKitPro${NC}"
@@ -90,4 +84,4 @@ emacs &
 echo -e "${GREEN}Post-install: Script finished${NC}"
 
 # Clean up
-rm -rf ~/setup.sh ~/post-install.sh
+rm -rf ~/post-install.sh
