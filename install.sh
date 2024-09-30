@@ -114,18 +114,66 @@ echo -e "${GREEN}[INFO] - VIM: Setting up colorscheme${NC}"
 echo "colo phoenix" >> ~/.vim_runtime/my_configs.vim
 echo "PhoenixBlueEighties" >> ~/.vim_runtime/my_configs.vim
 
+# Create the emacs.service file if it doesn't exist
+echo -e "${GREEN}[INFO] - Setting up Emacs daemon service${NC}"
+
+mkdir -p ~/.config/systemd/user
+
+cat <<EOF > ~/.config/systemd/user/emacs.service
+[Unit]
+Description=Emacs: the extensible, self-documenting text editor
+Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+EOF
+
+# Reload systemd user services
+systemctl --user daemon-reload
+
+# Enable the Emacs daemon service
+systemctl --user enable emacs.service
+
+# Setting up the post-install systemd service
+echo -e "${GREEN}[INFO] - Setting up post-install service${NC}"
+
+# Create the post-install.service file
+cat <<EOF > ~/.config/systemd/user/post-install.service
+[Unit]
+Description=Post-Install Script
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /home/galileo/post-install.sh
+ExecStartPost=/bin/rm /home/galileo/post-install.sh
+ExecStartPost=/bin/systemctl --user disable post-install.service
+RemainAfterExit=true
+
+[Install]
+WantedBy=default.target
+EOF
+
+# Enable the post-install service
+systemctl --user enable post-install.service
+
+# Downloading post-install script
 echo -e "${GREEN}[INFO] - Downloading post-install script${NC}"
 curl -o ~/post-install.sh https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/post-install.sh
 chmod +x ~/post-install.sh
 
-echo -e "${ORANGE}[WARNING] - System about to reboot to apply changes${NC}"
-echo -e "${ORANGE}[WARNING] - Don't forget to run the post-install script after reboot by running: ${NC}"
-echo -e "${ORANGE}[WARNING] - ~/post-install.sh${NC}"
+# Cleaning up install.sh itself
+echo -e "${GREEN}[INFO] - Cleaning up install.sh${NC}"
+rm -rf ~/install.sh
 
-echo "..."
+# Reboot to finalize the setup
+echo -e "${ORANGE}[WARNING] - Rebooting system to apply changes${NC}"
 sleep 5
-
-rm -rf ~/setup.sh
-
-echo -e "${ORANGE}[WARNING] - Rebooting system...${NC}"
 reboot

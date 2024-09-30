@@ -76,5 +76,9 @@ emacs
 
 echo -e "${GREEN}[INFO] - Post-install: Script finished${NC}"
 
-# Clean up
+# Clean up the post-install script once done
 rm -rf ~/post-install.sh
+
+# Optional: Reboot after post-install configuration
+echo -e "${ORANGE}[INFO] - Post-install script finished. Rebooting...${NC}"
+reboot
