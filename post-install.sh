@@ -16,6 +16,9 @@ set -e
 
 echo -e "${GREEN}[INFO] - Post-install: Setting up environment${NC}"
 
+echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
+cabal update && cabal ghcid
+
 # Ensure NVM is loaded
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
     echo -e "${GREEN}[INFO] - Post-install: Loading NVM${NC}"
