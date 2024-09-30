@@ -116,32 +116,11 @@ echo "PhoenixBlueEighties" >> ~/.vim_runtime/my_configs.vim
 # Create the emacs.service file if it doesn't exist
 echo -e "${GREEN}[INFO] - Setting up Emacs daemon service${NC}"
 
-# Create the post-install.service file
-cat <<EOF > ~/.config/systemd/user/post-install.service
-[Unit]
-Description=Post-Install Script
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStartPre=/bin/sh -c 'while [ -z "$(pgrep i3)" ]; do sleep 1; done'
-ExecStart=/bin/sh -c 'st -e /bin/sh /home/galileo/post-install.sh'
-ExecStartPost=/bin/rm /home/galileo/post-install.sh
-ExecStartPost=/bin/systemctl --user disable post-install.service
-RemainAfterExit=true
-
-[Install]
-WantedBy=default.target
-EOF
-
 # Reload systemd user services
 systemctl --user daemon-reload
 
 # Enable the Emacs daemon service
 systemctl --user enable emacs.service
-
-# Enable the post-install service
-systemctl --user enable post-install.service
 
 # Downloading post-install script
 echo -e "${GREEN}[INFO] - Downloading post-install script${NC}"
