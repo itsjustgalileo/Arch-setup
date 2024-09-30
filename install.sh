@@ -52,6 +52,14 @@ echo -e "${GREEN}[INFO] - Post-install: Enabling Docker and libvirt services${NC
 sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
 
+# dotfiles setup
+echo -e "${GREEN}[INFO] - st: Downloading dotfiles${NC}"
+git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
+
+echo -e "${GREEN}[INFO] - dotfiles: Deploying dotfiles${NC}"
+chmod +x ~/code/dotfiles/deploy.sh
+~/code/dotfiles/deploy.sh
+
 echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
 mkdir -p code/
 mkdir -p code/external
@@ -86,14 +94,6 @@ cd ~/code/external/cc65
 make
 # Going back home
 cd ~
-
-# dotfiles setup
-echo -e "${GREEN}[INFO] - st: Downloading dotfiles${NC}"
-git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
-
-echo -e "${GREEN}[INFO] - dotfiles: Deploying dotfiles${NC}"
-chmod +x ~/code/dotfiles/deploy.sh
-~/code/dotfiles/deploy.sh
 
 # Setting up VIM
 echo -e "${GREEN}[INFO] - Setting up VIM${NC}"
@@ -135,12 +135,6 @@ Restart=on-failure
 WantedBy=default.target
 EOF
 
-# Reload systemd user services
-systemctl --user daemon-reload
-
-# Enable the Emacs daemon service
-systemctl --user enable emacs.service
-
 # Setting up the post-install systemd service
 echo -e "${GREEN}[INFO] - Setting up post-install service${NC}"
 
@@ -160,6 +154,12 @@ RemainAfterExit=true
 [Install]
 WantedBy=default.target
 EOF
+
+# Reload systemd user services
+systemctl --user daemon-reload
+
+# Enable the Emacs daemon service
+systemctl --user enable emacs.service
 
 # Enable the post-install service
 systemctl --user enable post-install.service
