@@ -30,14 +30,6 @@ else
     echo -e "${ORANGE}NVM command not found, skipping Node.js setup.${NC}"
 fi
 
-# Log in to GitHub CLI
-if command -v gh > /dev/null; then
-    echo -e "${GREEN}Post-install: Logging into GitHub CLI${NC}"
-    gh auth login
-else
-    echo -e "${ORANGE}GitHub CLI (gh) not found, skipping GitHub login.${NC}"
-fi
-
 # Update Rust and set the stable toolchain
 if command -v rustup > /dev/null; then
     echo -e "${GREEN}Post-install: Updating Rust toolchain to the latest stable version${NC}"
@@ -47,13 +39,22 @@ else
     echo -e "${ORANGE}Rustup not found, skipping Rust update.${NC}"
 fi
 
+# Log in to GitHub CLI
+if command -v gh > /dev/null; then
+    echo -e "${GREEN}Post-install: Logging into GitHub CLI${NC}"
+    gh auth login
+else
+    echo -e "${ORANGE}GitHub CLI (gh) not found, skipping GitHub login.${NC}"
+fi
+
 # Black Arch
 echo -e "${GREEN}Running Black Arch Bootstrap${NC}"
-curl -O https://blackarch.org/strap.sh
+curl -o ~/strap.sh https://blackarch.org/strap.sh
 # Verify the SHA1 sum
-echo 26849980b35a42e6e192c6d9ed8c46f0d6d06047 strap.sh | sha1sum -c
-chmod +x strap.sh
-sudo ./strap.sh
+echo 26849980b35a42e6e192c6d9ed8c46f0d6d06047 ~/strap.sh | sha1sum -c
+chmod +x ~/strap.sh
+sudo ~/strap.sh
+rm -rf ~/script.sh
 
 # DevKitPro setup
 echo -e "${GREEN}Post-install: Setting up DevKitPro${NC}"
@@ -78,10 +79,12 @@ echo -e "${GREEN}Post-install: Enabling Docker and libvirt services${NC}"
 sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
 
+# Loading emacs config
 echo -e "${GREEN}Post-install: Running emacs to load config${NC}"
-emacs &
+echo -e "${GREEN}Post-install: Wait for emacs to finish loading and close it."
+emacs
 
 echo -e "${GREEN}Post-install: Script finished${NC}"
 
 # Clean up
-rm -rf ~/script.sh ~/post-install.sh
+rm -rf ~/post-install.sh
