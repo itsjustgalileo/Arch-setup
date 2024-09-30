@@ -44,6 +44,23 @@ else
     echo -e "${ORANGE}Rustup not found, skipping Rust update.${NC}"
 fi
 
+# Black Arch
+# Run https://blackarch.org/strap.sh as root and follow the instructions.
+echo -e "${GREEN}Running Black Arch Bootstrap${NC}"
+$ curl -O https://blackarch.org/strap.sh
+# Verify the SHA1 sum
+
+$ echo 26849980b35a42e6e192c6d9ed8c46f0d6d06047 strap.sh | sha1sum -c
+
+# Set execute bit
+chmod +x strap.sh
+
+# Run strap.sh
+sudo ./strap.sh
+
+# Enable multilib following https://wiki.archlinux.org/index.php/Official_repositories#Enabling_multilib and run:
+sudo pacman -Syu
+
 # DevKitPro setup
 echo -e "${GREEN}Post-install: Setting up DevKitPro${NC}"
 sudo pacman-key --recv BC26F752D25B92CE272E0F44F7FD5492264BB9D0 --keyserver keyserver.ubuntu.com
