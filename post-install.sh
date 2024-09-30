@@ -49,9 +49,9 @@ fi
 
 # Black Arch
 echo -e "${GREEN}Running Black Arch Bootstrap${NC}"
-$ curl -O https://blackarch.org/strap.sh
+curl -O https://blackarch.org/strap.sh
 # Verify the SHA1 sum
-$ echo 26849980b35a42e6e192c6d9ed8c46f0d6d06047 strap.sh | sha1sum -c
+echo 26849980b35a42e6e192c6d9ed8c46f0d6d06047 strap.sh | sha1sum -c
 chmod +x strap.sh
 sudo ./strap.sh
 
@@ -84,4 +84,4 @@ emacs &
 echo -e "${GREEN}Post-install: Script finished${NC}"
 
 # Clean up
-rm -rf ~/post-install.sh
+rm -rf ~/script.sh ~/post-install.sh
