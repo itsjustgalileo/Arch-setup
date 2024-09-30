@@ -47,6 +47,14 @@ else
     echo -e "${ORANGE}GitHub CLI (gh) not found, skipping GitHub login.${NC}"
 fi
 
+# Bun JS
+echo -e "Post-install: installing BunJS"
+curl -fsSL https://bun.sh/install | bash
+
+# Deno JS
+echo -e "Post-install: installing DenoJS"
+curl -fsSL https://deno.land/install.sh | sh
+
 # Black Arch
 echo -e "${GREEN}Running Black Arch Bootstrap${NC}"
 curl -o ~/strap.sh https://blackarch.org/strap.sh
