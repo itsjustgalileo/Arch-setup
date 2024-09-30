@@ -135,18 +135,16 @@ Restart=on-failure
 WantedBy=default.target
 EOF
 
-# Setting up the post-install systemd service
-echo -e "${GREEN}[INFO] - Setting up post-install service${NC}"
-
 # Create the post-install.service file
+cat <<EOF > ~/.config/systemd/user/post-install.service
 [Unit]
 Description=Post-Install Script
 After=network.target
 
 [Service]
 Type=oneshot
-ExecStartPre=/bin/sh -c 'while [ -z "$(pgrep i3)" ] || [ -z "$(pgrep chromium)" ]; do sleep 1; done'
-ExecStart=/bin/sh /home/galileo/post-install.sh
+ExecStartPre=/bin/sh -c 'while [ -z "$(pgrep i3)" ]; do sleep 1; done'
+ExecStart=/bin/sh -c 'st -e /bin/sh /home/galileo/post-install.sh'
 ExecStartPost=/bin/rm /home/galileo/post-install.sh
 ExecStartPost=/bin/systemctl --user disable post-install.service
 RemainAfterExit=true
