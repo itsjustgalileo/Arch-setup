@@ -60,10 +60,12 @@ echo -e "${GREEN}[INFO] - dotfiles: Deploying dotfiles${NC}"
 chmod +x ~/code/dotfiles/deploy.sh
 ~/code/dotfiles/deploy.sh
 
+# Creating ~/code/external directory
 echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
 mkdir -p code/
 mkdir -p code/external
 
+# Grabbing ourselves a terminal
 echo -e "${GREEN}[INFO] - st: Downloading st${NC}"
 git clone https://git.suckless.org/st ~/code/external/st
 
@@ -77,12 +79,9 @@ cd ~
 echo -e "${GREEN}[INFO] - Downloading NVM for JS setup${NC}"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-# Downloading Haskell tools
+# Downloading Haskell tools (equivalent to rustup)
 echo -e "${GREEN}[INFO] - Downloading GHC up for Haskell setup${NC}"
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-
-echo -e "${GREEN}[INFO] - Downloading ghcid${NC}"
-cabal-update && cabal install ghcid
 
 # cc65 compiler toolchain for 65x cpu development
 echo -e "${GREEN}[INFO] - cc65: Downloading cc65 compiler toolchains${NC}"
@@ -116,24 +115,6 @@ echo "PhoenixBlueEighties" >> ~/.vim_runtime/my_configs.vim
 
 # Create the emacs.service file if it doesn't exist
 echo -e "${GREEN}[INFO] - Setting up Emacs daemon service${NC}"
-
-mkdir -p ~/.config/systemd/user
-
-cat <<EOF > ~/.config/systemd/user/emacs.service
-[Unit]
-Description=Emacs: the extensible, self-documenting text editor
-Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
-After=network.target
-
-[Service]
-Type=forking
-ExecStart=/usr/bin/emacs --daemon
-ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
-Restart=on-failure
-
-[Install]
-WantedBy=default.target
-EOF
 
 # Create the post-install.service file
 cat <<EOF > ~/.config/systemd/user/post-install.service
