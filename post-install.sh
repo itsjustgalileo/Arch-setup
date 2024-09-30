@@ -21,7 +21,7 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
     echo -e "${GREEN}[INFO] - Post-install: Loading NVM${NC}"
     . "$HOME/.nvm/nvm.sh"
 else
-    echo -e "${RED}[WARNING] - NVM not found, skipping NVM setup.${NC}"
+    echo -e "${RED}[ERROR] - NVM not found, skipping NVM setup.${NC}"
 fi
 
 # Install and use the latest stable Node.js via NVM
@@ -30,7 +30,7 @@ if command -v nvm > /dev/null; then
     nvm install node
     nvm use node
 else
-    echo -e "${RED}[WARNING] - NVM command not found, skipping Node.js setup.${NC}"
+    echo -e "${RED}[ERROR] - NVM command not found, skipping Node.js setup.${NC}"
 fi
 
 # Installing Bun JS (Just in case)
@@ -47,7 +47,7 @@ if command -v rustup > /dev/null; then
     rustup update stable
     rustup self upgrade-data
 else
-    echo -e "${RED}[WARNING] - Rustup not found, skipping Rust update.${NC}"
+    echo -e "${RED}[ERROR] - Rustup not found, skipping Rust update.${NC}"
 fi
 
 # Log in to GitHub CLI
@@ -55,7 +55,7 @@ if command -v gh > /dev/null; then
     echo -e "${GREEN}[INFO] - Post-install: Logging into GitHub CLI${NC}"
     gh auth login
 else
-    echo -e "${RED}[WARNING] - GitHub CLI (gh) not found, skipping GitHub login.${NC}"
+    echo -e "${RED}[ERROR] - GitHub CLI (gh) not found, skipping GitHub login.${NC}"
 fi
 
 echo -e "${GREEN}[INFO] - Creating bump directory${NC}"
