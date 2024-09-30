@@ -28,9 +28,6 @@ This assumes you have already installed [Arch Linux x86_64](https://archlinux.or
 curl -o ~/setup.sh https://raw.githubusercontent.com/itsjustgalileo/Arch-setup/master/setup.sh
 chmod +x ~/setup.sh
 ~/setup.sh
-
-# After reboot run:
-~/post-install.sh
 ```
 
 From here on, the system should be pretty well setup
