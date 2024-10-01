@@ -43,7 +43,7 @@ rm -rf devkitpro-keyring.pkg.tar.xz
 
 # System upgrade (optional: upgrade system packages and data)
 echo -e "${GREEN}[INFO] - Post-install: Upgrading system packages${NC}"
-sudo pacman -Syu
+sudo pacman --noconfirm -Syu
 
 sudo systemctl restart systemd-binfmt
 
