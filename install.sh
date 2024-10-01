@@ -34,7 +34,7 @@ echo -e "${GREEN}[INFO] - Post-install: Setting up DevKitPro${NC}"
 sudo pacman-key --recv BC26F752D25B92CE272E0F44F7FD5492264BB9D0 --keyserver keyserver.ubuntu.com
 sudo pacman-key --lsign BC26F752D25B92CE272E0F44F7FD5492264BB9D0
 wget https://pkg.devkitpro.org/devkitpro-keyring.pkg.tar.xz
-sudo pacman -U devkitpro-keyring.pkg.tar.xz
+sudo pacman -U --noconfirm devkitpro-keyring.pkg.tar.xz
 echo "[dkp-libs]" | sudo tee -a /etc/pacman.conf
 echo "Server = https://pkg.devkitpro.org/packages" | sudo tee -a /etc/pacman.conf
 echo "[dkp-linux]" | sudo tee -a /etc/pacman.conf
