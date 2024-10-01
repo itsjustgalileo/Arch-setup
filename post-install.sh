@@ -61,12 +61,9 @@ git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/quest
 
-echo -e "${GREEN}[INFO] - Warming up emacs caches"
-echo -e "${ORANGE}[WARNING] - Wait for emacs to finish loading"
-emacs
-
 echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
-cabal update && cabal ghcid
+cabal update
+cabal install ghcid
 
 echo -e "${GREEN}[INFO] - Post-install: Script finished${NC}"
 
