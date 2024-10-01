@@ -16,9 +16,6 @@ set -e
 
 echo -e "${GREEN}[INFO] - Post-install: Setting up environment${NC}"
 
-echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
-cabal update && cabal ghcid
-
 # Ensure NVM is loaded
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
     echo -e "${GREEN}[INFO] - Post-install: Loading NVM${NC}"
@@ -71,6 +68,11 @@ echo -e "${GREEN}[INFO] - bump: Cloning progen${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/quest
+
+source ~/.zshrc
+
+echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
+cabal update && cabal ghcid
 
 echo -e "${GREEN}[INFO] - Post-install: Script finished${NC}"
 
