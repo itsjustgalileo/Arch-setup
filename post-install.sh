@@ -42,6 +42,10 @@ else
     echo -e "${RED}[ERROR] - Rustup not found, skipping Rust update.${NC}"
 fi
 
+echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
+cabal update
+cabal install ghcid
+
 # Log in to GitHub CLI
 if command -v gh > /dev/null; then
     echo -e "${GREEN}[INFO] - Post-install: Logging into GitHub CLI${NC}"
@@ -61,11 +65,10 @@ git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/quest
 
-echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
-cabal update
-cabal install ghcid
-
 echo -e "${GREEN}[INFO] - Post-install: Script finished${NC}"
+
+echo -e "${ORANGE}[INFO] - FINISH EMACS SETUP AND CLOSE IT TO FINISH INSTALL"
+emacs
 
 # Clean up the post-install script once done
 rm -rf ~/post-install.sh
