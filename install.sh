@@ -81,6 +81,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 # Downloading Haskell tools (equivalent to rustup)
 echo -e "${GREEN}[INFO] - Downloading GHC up for Haskell setup${NC}"
+echo -e "${ORANGE}[WARNING] - Choose 'N' for zshrc modification and 'Y' for the rest"
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 # cc65 compiler toolchain for 65x cpu development
@@ -115,12 +116,12 @@ echo "PhoenixBlueEighties" >> ~/.vim_runtime/my_configs.vim
 
 # Create the emacs.service file if it doesn't exist
 echo -e "${GREEN}[INFO] - Setting up Emacs daemon service${NC}"
-echo -e "${RED}[ERROR] - Uncomment this once GNU servers are back up"
+
 # Reload systemd user services
-# systemctl --user daemon-reload
+systemctl --user daemon-reload
 
 # Enable the Emacs daemon service
-# systemctl --user enable emacs.service
+systemctl --user enable emacs.service
 
 # Downloading post-install script
 echo -e "${GREEN}[INFO] - Downloading post-install script${NC}"
