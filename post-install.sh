@@ -16,6 +16,8 @@ set -e
 
 echo -e "${GREEN}[INFO] - Post-install: Setting up environment${NC}"
 
+chmod 444 ~/.zshrc
+
 # Ensure NVM is loaded
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
     echo -e "${GREEN}[INFO] - Post-install: Loading NVM${NC}"
@@ -40,6 +42,8 @@ curl -fsSL https://bun.sh/install | bash
 # Installing Deno JS (Just in case)
 echo -e "Post-install: Installing DenoJS"
 curl -fsSL https://deno.land/install.sh | sh
+
+chmod 644 ~/.zshrc
 
 # Update Rust and set the stable toolchain
 if command -v rustup > /dev/null; then
