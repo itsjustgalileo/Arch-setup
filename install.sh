@@ -115,12 +115,12 @@ echo "PhoenixBlueEighties" >> ~/.vim_runtime/my_configs.vim
 
 # Create the emacs.service file if it doesn't exist
 echo -e "${GREEN}[INFO] - Setting up Emacs daemon service${NC}"
-
+echo -e "${RED}[ERROR] - Uncomment this once GNU servers are back up"
 # Reload systemd user services
-systemctl --user daemon-reload
+# systemctl --user daemon-reload
 
 # Enable the Emacs daemon service
-systemctl --user enable emacs.service
+# systemctl --user enable emacs.service
 
 # Downloading post-install script
 echo -e "${GREEN}[INFO] - Downloading post-install script${NC}"
