@@ -19,7 +19,7 @@ ORANGE='\033[0;33m'    # Orange
 NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
-sudo pacman -Syyu --needed --noconfirm tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr libx11 i3-wm i3status dmenu feh picom qt6 pcmanfm vifm clipmenu vim emacs texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython python-pytest nasm jdk11-openjdk rustup go gcc-fortran gcc-ada hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip tree shellcheck chromium docker docker-compose
+sudo pacman -Syyu --needed tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr xorg-xwininfo imagemagick libx11 i3-wm i3status dmenu feh picom qt6 pcmanfm vifm clipmenu vim emacs texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython python-pytest nasm jdk11-openjdk rustup go gcc-fortran gcc-ada freebasic hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip tree shellcheck chromium docker docker-compose
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
@@ -45,9 +45,6 @@ rm -rf devkitpro-keyring.pkg.tar.xz
 echo -e "${GREEN}[INFO] - Post-install: Upgrading system packages${NC}"
 sudo pacman --noconfirm -Syu
 
-# restarting binfmt for wine
-sudo systemctl restart systemd-binfmt
-
 # Enable Docker and libvirtd services
 echo -e "${GREEN}[INFO] - Post-install: Enabling Docker and libvirt services${NC}"
 sudo systemctl enable --now docker
@@ -63,8 +60,9 @@ chmod +x ~/code/dotfiles/deploy.sh
 
 # Creating ~/code/external directory
 echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
-mkdir -p code/
-mkdir -p code/external
+mkdir -p ~/code/
+mkdir -p ~/code/external
+mkdir -p ~/code/tools
 
 # Grabbing ourselves a terminal
 echo -e "${GREEN}[INFO] - st: Downloading st${NC}"
@@ -105,16 +103,14 @@ cd ~
 
 # Aseprite setup
 echo -e "${GREEN}[INFO] - Aseprite: Downloading Aseprite${NC}"
-git clone https://github.com/aseprite/aseprite ~code/external/Aseprite
-echo -e "${GREEN}[INFO] - Aseprite: Building Aseprite${NC}"
-cd ~code/external/Aseprite
-cmake -Bbuild .
-cmake --build build
+cd ~/code/tools/aseprite wget https://bonfi96.altervista.org/files/aseprites_builds/Aseprite_v1.1.5.6_LNX.zip
+unzip Aseprite_v1.1.5.6_LNX.zip
+rm -rf Aseprite_v1.1.5.6_LNX.zip
 cd ~
 
 # fceux setup
 echo -e "${GREEN}[INFO] - FCEUX: Downloading FCEUX${NC}"
-git clone https://github.com/TASEmulators/fceux ~/code/external/fceux
+git clone https://github.com/TASEmulators/fceux ~/code/tools/fceux
 echo -e "${GREEN}[INFO] - FCEUX: Building FCEUX${NC}"
 cd ~/code/external/fceux
 cmake -Bbuild .
@@ -123,7 +119,7 @@ cd ~
 
 # YY-CHR
 echo -e "${GREEN}[INFO] - YY-CHR: Downloading YY-CHR"
-cd ~/code/external/
+cd ~/code/tools/
 mkdir yychr
 cd yychr
 wget https://dl.smwcentral.net/27208/yychr20210606.zip
@@ -140,21 +136,23 @@ git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 echo -e "${GREEN}[INFO] - VIM: Making custom config${NC}"
 touch ~/.vim_runtime/my_configs.vim
-echo -e "${GREEN}[INFO] - VIM: Downloading VIM phoenix theme${NC}"
-git clone https://github.com/widatama/vim-phoenix ~/.vim_runtime/my_plugins/vim-phoenix
+echo -e "${GREEN}[INFO] - VIM: Grabbing protanopia theme${NC}"
+git clone https://github.com/itsjustgalileo/protanopia-vim ~/.vim_runtime/my_plugins/protanopia-vim/
+echo -e "${GREEN}[INFO] - VIM: Setting up NerdTree${NC}"
 echo -e "${RED} WHO PUTS A FILE EXPLORER ON THE RIGHT?"
 sed -i 's/let g:NERDTreeWinPos = "right"/let g:NERDTreeWinPos = "left"/' ~/.vim_runtime/vimrcs/plugins_config.vim
 echo -e "${GREEN}[INFO] - VIM: Line number/relative line number${NC}"
 echo "set nu rnu" >> ~/.vim_runtime/my_configs.vim
 echo -e "${GREEN}[INFO] - VIM: Remapping keys${NC}"
 echo "inoremap jk <Esc>" >> ~/.vim_runtime/my_configs.vim
-echo -e "${GREEN}[INFO] - VIM: Setting up NerdTree${NC}"
 echo -e "${GREEN}[INFO] - VIM: Setting up colorscheme${NC}"
-echo "colo phoenix" >> ~/.vim_runtime/my_configs.vim
-echo "PhoenixBlueEighties" >> ~/.vim_runtime/my_configs.vim
+echo "colo protanopia" >> ~/.vim_runtime/my_configs.vim
 
 # Create the emacs.service file if it doesn't exist
-echo -e "${GREEN}[INFO] - Setting up Emacs daemon service${NC}"
+echo -e "${GREEN}[INFO] - Setting up daemon service${NC}"
+
+# restarting binfmt for wine
+sudo systemctl restart systemd-binfmt
 
 # Reload systemd user services
 systemctl --user daemon-reload
