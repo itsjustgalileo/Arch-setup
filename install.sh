@@ -63,6 +63,7 @@ echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
 mkdir -p ~/code/
 mkdir -p ~/code/external
 mkdir -p ~/code/tools
+mkdir -p ~/code/tools/aseprite
 
 # Grabbing ourselves a terminal
 echo -e "${GREEN}[INFO] - st: Downloading st${NC}"
@@ -103,7 +104,8 @@ cd ~
 
 # Aseprite setup
 echo -e "${GREEN}[INFO] - Aseprite: Downloading Aseprite${NC}"
-cd ~/code/tools/aseprite wget https://bonfi96.altervista.org/files/aseprites_builds/Aseprite_v1.1.5.6_LNX.zip
+cd ~/code/tools/aseprite 
+wget https://bonfi96.altervista.org/files/aseprites_builds/Aseprite_v1.1.5.6_LNX.zip
 unzip Aseprite_v1.1.5.6_LNX.zip
 rm -rf Aseprite_v1.1.5.6_LNX.zip
 cd ~
