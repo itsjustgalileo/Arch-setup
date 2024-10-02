@@ -108,6 +108,7 @@ cd ~/code/tools/aseprite
 wget https://bonfi96.altervista.org/files/aseprites_builds/Aseprite_v1.1.5.6_LNX.zip
 unzip Aseprite_v1.1.5.6_LNX.zip
 rm -rf Aseprite_v1.1.5.6_LNX.zip
+chmod +x aseprite
 cd ~
 
 # fceux setup
