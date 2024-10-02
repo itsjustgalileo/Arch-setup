@@ -42,10 +42,6 @@ else
     echo -e "${RED}[ERROR] - Rustup not found, skipping Rust update.${NC}"
 fi
 
-echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
-cabal update
-cabal install ghcid
-
 # Log in to GitHub CLI
 if command -v gh > /dev/null; then
     echo -e "${GREEN}[INFO] - Post-install: Logging into GitHub CLI${NC}"
@@ -53,6 +49,11 @@ if command -v gh > /dev/null; then
 else
     echo -e "${RED}[ERROR] - GitHub CLI (gh) not found, skipping GitHub login.${NC}"
 fi
+
+
+echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
+cabal update
+cabal install ghcid
 
 echo -e "${GREEN}[INFO] - Creating bump directory${NC}"
 mkdir -p ~/code/bump
@@ -63,7 +64,7 @@ git clone https://github.com/itsjustgalileo/x-roulette ~/code/bump/x-roulette
 echo -e "${GREEN}[INFO] - bump: Cloning progen${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
-git clone https://github.com/itsjustgalileo/progen ~/code/bump/quest
+git clone https://github.com/itsjustgalileo/quest ~/code/bump/quest
 
 echo -e "${GREEN}[INFO] - Post-install: Script finished${NC}"
 
