@@ -50,10 +50,13 @@ else
     echo -e "${RED}[ERROR] - GitHub CLI (gh) not found, skipping GitHub login.${NC}"
 fi
 
-
 echo -e "${GREEN}[INFO] - Post-install: installing ghcid"
-cabal update
-cabal install ghcid
+if command -v cabal > /dev/null; then
+    cabal update
+    cabal install ghcid
+else
+    echo -e "${RED}[ERROR] - cabal not found, skipping ghcid install.${NC}"
+fi
 
 echo -e "${GREEN}[INFO] - Creating bump directory${NC}"
 mkdir -p ~/code/bump
