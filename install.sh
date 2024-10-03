@@ -19,7 +19,26 @@ ORANGE='\033[0;33m'    # Orange
 NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
-sudo pacman -Syyu --needed tmux wget git github-cli diff-so-fancy git-lfs bat pulseaudio alsa-utils jack2 libwebp xorg-server xorg-xinit xorg-xrandr xorg-xwininfo imagemagick libx11 i3-wm i3status dmenu feh picom pcmanfm vifm clipmenu vim emacs texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib llvm clang lldb gdb valgrind cmake ninja python3 python-pip ipython python-pytest nasm jdk11-openjdk rustup go gcc-fortran gcc-ada freebasic coq clojure hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt virt-manager dnsmasq bridge-utils ttf-ibm-plex bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip tree shellcheck chromium docker docker-compose qt6-3d qt6-5compat qt6-base qt6-charts qt6-connectivity qt6-datavis3d qt6-declarative qt6-doc qt6-examples qt6-graphs qt6-grpc qt6-httpserver qt6-imageformats qt6-languageserver qt6-location qt6-lottie qt6-multimedia qt6-networkauth qt6-positioning qt6-quick3d qt6-quick3dphysics qt6-quickeffectmaker qt6-quicktimeline qt6-remoteobjects qt6-scxml qt6-sensors qt6-serialbus qt6-serialport qt6-shadertools qt6-speech qt6-svg qt6-tools qt6-translations qt6-virtualkeyboard qt6-wayland qt6-webchannel qt6-webengine qt6-websockets qt6-webview qt6-multimedia-ffmpeg
+sudo pacman -Syyu --needed \
+tmux wget bat clipmenu tree bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip ttf-ibm-plex shellcheck vifm \
+pulseaudio alsa-utils jack2 \
+libwebp xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu \
+feh picom scrot \
+vvim emacs \
+texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib \
+git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja \
+clang \
+python3 python-pip ipython python-pipx \
+nasm \
+jdk-openjdk jre-openjdk \
+rustup go \
+gcc-fortran gcc-ada freebasic \ 
+erlang coq graphviz clojure octave sbcl ocaml perl elixir \
+hoogle doxygen \
+wine wine-mono mingw-w64 \
+libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools \
+qemu-full libvirt virt-manager dnsmasq bridge-utils  docker docker-compose  \
+pcmanfm chromium qt6
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
@@ -50,6 +69,14 @@ echo -e "${GREEN}[INFO] - Post-install: Enabling Docker and libvirt services${NC
 sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
 
+# Creating ~/code/external directory
+echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
+mkdir -p ~/code/
+mkdir -p ~/code/external
+mkdir -p ~/code/tools
+mkdir -p ~/code/tools/aseprite
+mkdir -p ~/code/fonts/
+
 # dotfiles setup
 echo -e "${GREEN}[INFO] - st: Downloading dotfiles${NC}"
 git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
@@ -58,12 +85,12 @@ echo -e "${GREEN}[INFO] - dotfiles: Deploying dotfiles${NC}"
 chmod +x ~/code/dotfiles/deploy.sh
 ~/code/dotfiles/deploy.sh
 
-# Creating ~/code/external directory
-echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
-mkdir -p ~/code/
-mkdir -p ~/code/external
-mkdir -p ~/code/tools
-mkdir -p ~/code/tools/aseprite
+# setting up fonts
+wget ~/code/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/IBMPlexMono.zip
+unzip ~/code/fonts/IBMPlexMono.zip
+rm -rf ~/code/fonts/IBMPlexMono.zip
+mv ~/code/fonts/* ~/.local/share/fonts
+fc-cache -fv
 
 # Grabbing ourselves a terminal
 echo -e "${GREEN}[INFO] - st: Downloading st${NC}"
@@ -72,7 +99,7 @@ echo -e "${GREEN}[INFO] - st: Building st${NC}"
 cd ~/code/external/st
 sudo make clean install
 echo -e "${GREEN}[INFO] - st: Configuring st${NC}"
-sed -i 's/Liberation/IBM Plex/' config.h
+sed -i 's/Liberation Mono/BlexMono Nerd Font/' config.h
 sed -i 's/pixelsize=12/pixelsize=14/' config.h
 sed -i 's/sh\"/zsh\"/' config.h
 sed -i 's/termname = \"st-256color\"/termname = \"st\"/' config.h
