@@ -5,7 +5,7 @@
 # Arch Linux machine assuming that Linux was pacstraped
 # with the following packages:
 # pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware zsh grub efibootmgr vi man-db man-pages terminus-font
-# and the user was added with the flag `-s /bin/zsh`
+# and the user was added to sudoers and created with flags `-m -G wheel -s /bin/zsh`
 # some packages up here might not make sense in the
 # context of the setup, they are reminders to myself.
 #! /bin/sh
