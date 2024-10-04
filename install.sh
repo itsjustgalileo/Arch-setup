@@ -20,35 +20,7 @@ NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
 sudo pacman -Syyu --needed \
-tmux wget bat clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck vifm slock \ # shell tools
-pulseaudio alsa-utils jack2 \ # audio tools 
-libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu \ # desktop environment tools
-feh picom scrot \ # image tools
-vim emacs \ # text editors
-texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib \ # LaTeX tools
-git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja \ # Dev tools
-clang \ # C/C++ tools
-python3 ipython python-pip python-pipx jupyter-notebook \ # Python tools
-nasm \ # Assembly tools
-jdk-openjdk jre-openjdk \ # Java tools
-rustup \ # Rust tools
-go \ # Go tools
-gcc-fortran \ # Fortran tools
-gcc-ada \ # Ada tools
-freebasic \ # BASIC tools
-erlang \ #Erlang tools
-coq graphviz clojure octave kmplot \ # Math tools
-sbcl \ # LISP tools
-ocaml \ # OCaml tools
-perl \ # Perl tools
-elixir \ # Elixir tools
-nim \ # Nim tools
-lua \ # Lua :)
-hoogle doxygen \ # Documentation tools
-wine wine-mono mingw-w64 \ # Win32 tools
-libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools \ # GPU tools
-ttf-ibm-plex otf-latin-modern otf-latinmodern-math noto-fonts-emoji \ # Fonts tools
-pcmanfm chromium blender gimp inkscape reaper vlc # Misc.
+tmux wget bat clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck vifm slock pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu feh picom scrot vim emacs texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook nasm jdk-openjdk jre-openjdk rustup go gcc-fortran gcc-ada freebasic erlang coq graphviz clojure octave kmplot sbcl ocaml perl elixir nim lua hoogle doxygen wine wine-mono mingw-w64 libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools ttf-ibm-plex otf-latin-modern otf-latinmodern-math noto-fonts-emoji pcmanfm chromium blender gimp inkscape reaper vlc
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
