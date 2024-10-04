@@ -43,6 +43,7 @@ ocaml \ # OCaml tools
 perl \ # Perl tools
 elixir \ # Elixir tools
 nim \ # Nim tools
+lua \ # Lua :)
 hoogle doxygen \ # Documentation tools
 wine wine-mono mingw-w64 \ # Win32 tools
 libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools \ # GPU tools
