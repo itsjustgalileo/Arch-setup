@@ -46,7 +46,7 @@ nim \ # Nim tools
 hoogle doxygen \ # Documentation tools
 wine wine-mono mingw-w64 \ # Win32 tools
 libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools \ # GPU tools
-ttf-ibm-plex ttf-junicode noto-fonts-emoji \ # Fonts tools
+ttf-ibm-plex otf-latin-modern otf-latinmodern-math noto-fonts-emoji \ # Fonts tools
 pcmanfm chromium blender gimp inkscape reaper vlc # Misc.
 
 # Black Arch
