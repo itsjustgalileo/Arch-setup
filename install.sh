@@ -47,9 +47,11 @@ echo -e "${GREEN}[INFO] - Post-install: Upgrading system packages${NC}"
 sudo pacman --noconfirm -Syu
 
 # Enable Docker and libvirtd services
-echo -e "${GREEN}[INFO] - Post-install: Enabling Docker and libvirt services${NC}"
+echo -e "${GREEN}[INFO] - Post-install: Enabling systemd services${NC}"
 sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
+# restarting binfmt for wine
+sudo systemctl restart systemd-binfmt
 
 # Creating ~/code/external directory
 echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
@@ -151,18 +153,6 @@ echo -e "${GREEN}[INFO] - VIM: Remapping keys${NC}"
 echo "inoremap jk <Esc>" >> ~/.vim_runtime/my_configs.vim
 echo -e "${GREEN}[INFO] - VIM: Setting up colorscheme${NC}"
 echo "colorscheme protanopia" >> ~/.vim_runtime/my_configs.vim
-
-# Starting up system services
-echo -e "${GREEN}[INFO] - Setting up daemon services${NC}"
-
-# restarting binfmt for wine
-sudo systemctl restart systemd-binfmt
-
-# Reload systemd user services
-systemctl --user daemon-reload
-
-# Enable the Emacs daemon service
-systemctl --user enable emacs.service
 
 # Refreshing fonts
 echo -r "${GREEN}[INFO] - Refreshing fonts${NC}"
