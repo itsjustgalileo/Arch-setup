@@ -50,6 +50,14 @@ else
     echo -e "${RED}[ERROR] - GitHub CLI (gh) not found, skipping GitHub login.${NC}"
 fi
 
+echo -e "${GREEN}[INFO] - Post-install: Setting up Lisp SLIME${NC}"
+curl -o /tmp/ql.lisp http://beta.quicklisp.org/quicklisp.lisp
+sbcl --no-sysinit --no-userinit --load /tmp/ql.lisp \
+       --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
+       --eval '(ql:add-to-init-file)' \
+       --quit
+sbcl --eval '(ql:quickload :quicklisp-slime-helper)' --quit
+
 echo -e "${GREEN}[INFO] - Post-install: Installing ghcid${NC}"
 /home/galileo/.ghcup/bin/cabal update
 /home/galileo/.ghcup/bin/cabal install ghcid
