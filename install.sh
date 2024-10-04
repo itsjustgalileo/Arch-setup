@@ -1,10 +1,10 @@
 # \file install.sh
-# \brief Arch/BlackArch automated build script
-# This script download and installs all necessary
+# \brief Arch/BlackArch automated setup script
+# This script downloads and installs all the necessary
 # tools to setup my devenv on any freshly installed 
 # Arch Linux machine assuming that Linux was pacstraped
 # with the following packages:
-# pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware grub efibootmgr vi man-db man-pages zsh terminus-font
+# pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware zsh grub efibootmgr vi man-db man-pages terminus-font
 # and the user was added with the flag `-s /bin/zsh`
 # some packages up here might not make sense in the
 # context of the setup, they are reminders to myself.
@@ -20,25 +20,34 @@ NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
 sudo pacman -Syyu --needed \
-tmux wget bat clipmenu tree bpytop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip ttf-ibm-plex shellcheck vifm \
-pulseaudio alsa-utils jack2 \
-libwebp xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu \
-feh picom scrot \
-vvim emacs \
-texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib \
-git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja \
-clang \
-python3 python-pip ipython python-pipx \
-nasm \
-jdk-openjdk jre-openjdk \
-rustup go \
-gcc-fortran gcc-ada freebasic \ 
-erlang coq graphviz clojure octave sbcl ocaml perl elixir \
-hoogle doxygen \
-wine wine-mono mingw-w64 \
-libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools \
-qemu-full libvirt virt-manager dnsmasq bridge-utils  docker docker-compose  \
-pcmanfm chromium qt6
+tmux wget bat clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck vifm slock \ # shell tools
+pulseaudio alsa-utils jack2 \ # audio tools 
+libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu \ # desktop environment tools
+feh picom scrot \ # image tools
+vim emacs \ # text editors
+texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib \ # LaTeX tools
+git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja \ # Dev tools
+clang \ # C/C++ tools
+python3 ipython python-pip python-pipx jupyter-notebook \ # Python tools
+nasm \ # Assembly tools
+jdk-openjdk jre-openjdk \ # Java tools
+rustup \ # Rust tools
+go \ # Go tools
+gcc-fortran \ # Fortran tools
+gcc-ada \ # Ada tools
+freebasic \ # BASIC tools
+erlang \ #Erlang tools
+coq graphviz clojure octave kmplot \
+sbcl \ # LISP tools
+ocaml \ # OCaml tools
+perl \ # Perl tools
+elixir \ # Elixir tools
+nim \ # Nim tools
+hoogle doxygen \ # Documentation tools
+wine wine-mono mingw-w64 \ # Win32 tools
+libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools \ # GPU tools
+ttf-ibm-plex ttf-junicode noto-fonts-emoji \ # Fonts tools
+pcmanfm firefox blender gimp inkscape reaper vlc # Misc.
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
@@ -72,10 +81,11 @@ sudo systemctl enable --now libvirtd
 # Creating ~/code/external directory
 echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
 mkdir -p ~/code/
+mkdir -p ~/utils/
 mkdir -p ~/code/external
 mkdir -p ~/code/tools
-mkdir -p ~/code/tools/aseprite
-mkdir -p ~/code/fonts/
+mkdir -p ~/software/aseprite
+mkdir -p
 
 # dotfiles setup
 echo -e "${GREEN}[INFO] - st: Downloading dotfiles${NC}"
@@ -85,28 +95,20 @@ echo -e "${GREEN}[INFO] - dotfiles: Deploying dotfiles${NC}"
 chmod +x ~/code/dotfiles/deploy.sh
 ~/code/dotfiles/deploy.sh
 
-# setting up fonts
-wget ~/code/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/IBMPlexMono.zip
-unzip ~/code/fonts/IBMPlexMono.zip
-rm -rf ~/code/fonts/IBMPlexMono.zip
-mv ~/code/fonts/* ~/.local/share/fonts
-fc-cache -fv
-
 # Grabbing ourselves a terminal
 echo -e "${GREEN}[INFO] - st: Downloading st${NC}"
-git clone https://git.suckless.org/st ~/code/external/st
+git clone https://github.com/itsjustgalileo/st/ ~/utils/st
 echo -e "${GREEN}[INFO] - st: Building st${NC}"
-cd ~/code/external/st
-sudo make clean install
-echo -e "${GREEN}[INFO] - st: Configuring st${NC}"
-sed -i 's/Liberation Mono/BlexMono Nerd Font/' config.h
-sed -i 's/pixelsize=12/pixelsize=14/' config.h
-sed -i 's/sh\"/zsh\"/' config.h
-sed -i 's/termname = \"st-256color\"/termname = \"st\"/' config.h
-sed -i 's/tabspaces = 8/tabspaces = 4/' config.h
-echo -e "${GREEN}[INFO] - st: Rebuilding st${NC}"
+cd ~/utils/st
 sudo make clean install
 # Going back home
+cd ~
+
+# Desktop zooming
+echo -e "${GREEN}[INFO] - OK BOOMER"
+git clone https://github.com/tsoding/boomer ~/utils/boomer
+cd ~/utils/boomer
+nimble build
 cd ~
 
 # Downloading NVM for node and npm management
@@ -131,7 +133,7 @@ cd ~
 
 # Aseprite setup
 echo -e "${GREEN}[INFO] - Aseprite: Downloading Aseprite${NC}"
-cd ~/code/tools/aseprite 
+cd ~/software/aseprite 
 wget https://bonfi96.altervista.org/files/aseprites_builds/Aseprite_v1.1.5.6_LNX.zip
 unzip Aseprite_v1.1.5.6_LNX.zip
 rm -rf Aseprite_v1.1.5.6_LNX.zip
@@ -176,10 +178,10 @@ echo "set nu rnu" >> ~/.vim_runtime/my_configs.vim
 echo -e "${GREEN}[INFO] - VIM: Remapping keys${NC}"
 echo "inoremap jk <Esc>" >> ~/.vim_runtime/my_configs.vim
 echo -e "${GREEN}[INFO] - VIM: Setting up colorscheme${NC}"
-echo "colo protanopia" >> ~/.vim_runtime/my_configs.vim
+echo "colorscheme protanopia" >> ~/.vim_runtime/my_configs.vim
 
-# Create the emacs.service file if it doesn't exist
-echo -e "${GREEN}[INFO] - Setting up daemon service${NC}"
+# Starting up system services
+echo -e "${GREEN}[INFO] - Setting up daemon services${NC}"
 
 # restarting binfmt for wine
 sudo systemctl restart systemd-binfmt
