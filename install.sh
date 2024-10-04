@@ -20,7 +20,7 @@ NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
 sudo pacman -Syyu --needed \
-tmux wget bat clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck vifm slock pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu feh picom scrot vim emacs texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook nasm jdk-openjdk rustup go gcc-fortran gcc-ada freebasic erlang coq graphviz clojure octave kmplot sbcl ocaml perl elixir nim lua hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-gcc mingw-w64-crt mingw-w64-winpthreads mingw-w64-headers libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools ttf-ibm-plex otf-latin-modern otf-latinmodern-math noto-fonts-emoji pcmanfm chromium blender gimp inkscape reaper vlc qt6-multimedia-ffmpeg
+tmux wget bat clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck vifm slock pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo arc-gtk-theme i3-wm i3status dmenu feh picom scrot vim emacs texlive-basic zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook nasm jdk-openjdk rustup go gcc-fortran gcc-ada freebasic erlang coq graphviz clojure octave kmplot sbcl ocaml perl elixir nim lua hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-gcc mingw-w64-crt mingw-w64-winpthreads mingw-w64-headers libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt docker docker-compose ttf-ibm-plex otf-latin-modern otf-latinmodern-math noto-fonts-emoji pcmanfm chromium blender gimp inkscape reaper vlc qt6-multimedia-ffmpeg
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
@@ -58,7 +58,6 @@ mkdir -p ~/utils/
 mkdir -p ~/code/external
 mkdir -p ~/code/tools
 mkdir -p ~/software/aseprite
-mkdir -p
 
 # dotfiles setup
 echo -e "${GREEN}[INFO] - st: Downloading dotfiles${NC}"
@@ -117,7 +116,7 @@ cd ~
 echo -e "${GREEN}[INFO] - FCEUX: Downloading FCEUX${NC}"
 git clone https://github.com/TASEmulators/fceux ~/code/tools/fceux
 echo -e "${GREEN}[INFO] - FCEUX: Building FCEUX${NC}"
-cd ~/code/external/fceux
+cd ~/code/tools/fceux
 cmake -Bbuild .
 cmake --build build
 cd ~
