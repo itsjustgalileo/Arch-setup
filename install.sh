@@ -37,7 +37,7 @@ gcc-fortran \ # Fortran tools
 gcc-ada \ # Ada tools
 freebasic \ # BASIC tools
 erlang \ #Erlang tools
-coq graphviz clojure octave kmplot \
+coq graphviz clojure octave kmplot \ # Math tools
 sbcl \ # LISP tools
 ocaml \ # OCaml tools
 perl \ # Perl tools
@@ -105,7 +105,7 @@ sudo make clean install
 cd ~
 
 # Desktop zooming
-echo -e "${GREEN}[INFO] - OK BOOMER"
+echo -e "${GREEN}[INFO] - OK BOOMER${NC}"
 git clone https://github.com/tsoding/boomer ~/utils/boomer
 cd ~/utils/boomer
 nimble build
@@ -191,6 +191,10 @@ systemctl --user daemon-reload
 
 # Enable the Emacs daemon service
 systemctl --user enable emacs.service
+
+# Refreshing fonts
+echo -r "${GREEN}[INFO] - Refreshing fonts${NC}"
+fc-cache -f -v
 
 # Downloading post-install script
 echo -e "${GREEN}[INFO] - Downloading post-install script${NC}"
