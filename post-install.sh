@@ -73,10 +73,16 @@ git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
 echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
 git clone https://github.com/itsjustgalileo/quest ~/code/bump/quest
 
-echo -e "${GREEN}[INFO] - Post-install: Script finished${NC}"
-
 echo -e "${ORANGE}[INFO] - FINISH EMACS SETUP AND CLOSE IT TO FINISH INSTALL"
 emacs
+
+# Starting up system services
+echo -e "${GREEN}[INFO] - Setting up daemon services${NC}"
+# Reload systemd user services
+systemctl --user daemon-reload
+
+# Enable the Emacs daemon service
+systemctl --user enable emacs.service
 
 # Clean up the post-install script once done
 rm -rf ~/post-install.sh
