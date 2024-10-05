@@ -82,8 +82,9 @@ emacs
 # systemctl --user enable emacs.service
 
 echo -e "${GREEN}[INFO] - Post-install: Installing ghcid${NC}"
+source ~code/dotfiles/.zshrc
 sleep 3
-/home/galileo/.ghcup/bin/cabal install ghcid
+st -e /home/galileo/.ghcup/bin/cabal install ghcid
 
 # Clean up the post-install script once done
 rm -rf ~/post-install.sh
