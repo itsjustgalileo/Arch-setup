@@ -58,10 +58,6 @@ sbcl --no-sysinit --no-userinit --load /tmp/ql.lisp \
        --quit
 sbcl --eval '(ql:quickload :quicklisp-slime-helper)' --quit
 
-echo -e "${GREEN}[INFO] - Post-install: Installing ghcid${NC}"
-/home/galileo/.ghcup/bin/cabal update
-/home/galileo/.ghcup/bin/cabal install ghcid
-
 echo -e "${GREEN}[INFO] - Creating bump directory${NC}"
 mkdir -p ~/code/bump
 
@@ -74,15 +70,20 @@ echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
 git clone https://github.com/itsjustgalileo/quest ~/code/bump/quest
 
 echo -e "${ORANGE}[INFO] - FINISH EMACS SETUP AND CLOSE IT TO FINISH INSTALL"
+echo -e "${GREEN}[INFO] - Post-install: updating LaTeX pdf tools${NC}"
+sudo fmtutil --user --all
 emacs
 
 # Starting up system services
-echo -e "${GREEN}[INFO] - Setting up daemon services${NC}"
+# echo -e "${GREEN}[INFO] - Setting up daemon services${NC}"
 # Reload systemd user services
-systemctl --user daemon-reload
-
+# systemctl --user daemon-reload
 # Enable the Emacs daemon service
-systemctl --user enable emacs.service
+# systemctl --user enable emacs.service
+
+echo -e "${GREEN}[INFO] - Post-install: Installing ghcid${NC}"
+sleep 3
+/home/galileo/.ghcup/bin/cabal install ghcid
 
 # Clean up the post-install script once done
 rm -rf ~/post-install.sh
