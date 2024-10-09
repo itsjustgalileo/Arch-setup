@@ -50,14 +50,6 @@ else
     echo -e "${RED}[ERROR] - GitHub CLI (gh) not found, skipping GitHub login.${NC}"
 fi
 
-echo -e "${GREEN}[INFO] - Post-install: Setting up Lisp SLIME${NC}"
-curl -o /tmp/ql.lisp http://beta.quicklisp.org/quicklisp.lisp
-sbcl --no-sysinit --no-userinit --load /tmp/ql.lisp \
-       --eval '(quicklisp-quickstart:install :path "~/.quicklisp")' \
-       --eval '(ql:add-to-init-file)' \
-       --quit
-sbcl --eval '(ql:quickload :quicklisp-slime-helper)' --quit
-
 echo -e "${GREEN}[INFO] - Creating bump directory${NC}"
 mkdir -p ~/code/bump
 
@@ -66,8 +58,6 @@ echo -e "${GREEN}[INFO] - bump: Cloning x-roulette${NC}"
 git clone https://github.com/itsjustgalileo/x-roulette ~/code/bump/x-roulette
 echo -e "${GREEN}[INFO] - bump: Cloning progen${NC}"
 git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
-echo -e "${GREEN}[INFO] - bump: Cloning quest${NC}"
-git clone https://github.com/itsjustgalileo/quest ~/code/bump/quest
 
 echo -e "${ORANGE}[INFO] - FINISH EMACS SETUP AND CLOSE IT TO FINISH INSTALL"
 echo -e "${GREEN}[INFO] - Post-install: updating LaTeX pdf tools${NC}"
