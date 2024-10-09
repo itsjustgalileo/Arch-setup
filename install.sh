@@ -4,7 +4,7 @@
 # tools to setup my devenv on any freshly installed 
 # Arch Linux machine assuming that Linux was pacstraped
 # with the following packages:
-# pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware zsh grub efibootmgr vi man-db man-pages terminus-font
+# pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware grub efibootmgr vi man-db man-pages terminus-font
 # and the user was added to sudoers and created with flags `-m -G wheel -s /bin/zsh`
 # some packages up here might not make sense in the
 # context of the setup, they are reminders to myself.
@@ -20,7 +20,7 @@ NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
 sudo pacman -Syyu --needed \
-tmux wget bat clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck vifm slock pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo arc-gtk-theme i3-wm i3status dmenu feh picom scrot vim emacs texlive-basic texlive-core texlive-bin texlive-latexextra zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook nasm jdk-openjdk rustup go gcc-fortran gcc-ada freebasic erlang coq graphviz clojure octave kmplot sbcl ocaml perl elixir nim lua hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-gcc mingw-w64-crt mingw-w64-winpthreads mingw-w64-headers libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools qemu-full libvirt docker docker-compose ttf-ibm-plex otf-latin-modern otf-latinmodern-math noto-fonts-emoji pcmanfm chromium blender gimp inkscape reaper vlc qt6-multimedia-ffmpeg
+tmux wget clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck vifm slock pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo arc-gtk-theme i3-wm i3status dmenu feh picom scrot vim emacs texlive-basic texlive-core texlive-bin texlive-latexextra zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook jdk-openjdk rustup go nim hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-gcc mingw-w64-crt mingw-w64-winpthreads mingw-w64-headers libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools libvirt docker docker-compose ttf-ibm-plex otf-latin-modern otf-latinmodern-math noto-fonts-emoji pcmanfm chromium vlc qt6-multimedia-ffmpeg
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
