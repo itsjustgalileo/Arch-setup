@@ -51,30 +51,23 @@ else
 fi
 
 echo -e "${GREEN}[INFO] - Creating bump directory${NC}"
-mkdir -p ~/code/bump
+mkdir -p ~/code/pool
 
 echo -e "${GREEN}[INFO] - Cloning bump repos${NC}"
 echo -e "${GREEN}[INFO] - bump: Cloning x-roulette${NC}"
-git clone https://github.com/itsjustgalileo/x-roulette ~/code/bump/x-roulette
+git clone https://github.com/itsjustgalileo/x-roulette ~/code/pool/x-roulette
 echo -e "${GREEN}[INFO] - bump: Cloning progen${NC}"
-git clone https://github.com/itsjustgalileo/progen ~/code/bump/progen
+git clone https://github.com/itsjustgalileo/progen ~/code/pool/progen
 
 echo -e "${ORANGE}[INFO] - FINISH EMACS SETUP AND CLOSE IT TO FINISH INSTALL"
 echo -e "${GREEN}[INFO] - Post-install: updating LaTeX pdf tools${NC}"
 sudo fmtutil --user --all
 emacs
 
-# Starting up system services
-# echo -e "${GREEN}[INFO] - Setting up daemon services${NC}"
-# Reload systemd user services
-# systemctl --user daemon-reload
-# Enable the Emacs daemon service
-# systemctl --user enable emacs.service
-
 echo -e "${GREEN}[INFO] - Post-install: Installing ghcid${NC}"
-source ~code/dotfiles/.zshrc
+source ~/code/dotfiles/.bashrc
 sleep 3
-st -e /home/galileo/.ghcup/bin/cabal install ghcid
+~/.ghcup/bin/cabal install ghcid
 
 # Clean up the post-install script once done
 rm -rf ~/post-install.sh
