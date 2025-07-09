@@ -4,7 +4,7 @@
 # tools to setup my devenv on any freshly installed 
 # Arch Linux machine assuming that Linux was pacstraped
 # with the following packages:
-# pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware grub efibootmgr vi man-db man-pages terminus-font
+# pacstrap -K /mnt linux linux-firmware base base-devel networkmanager sof-firmware grub efibootmgr zsh vi man-db man-pages terminus-font
 # and the user was added to sudoers and created with flags `-m -G wheel -s /bin/zsh`
 # some packages up here might not make sense in the
 # context of the setup, they are reminders to myself.
