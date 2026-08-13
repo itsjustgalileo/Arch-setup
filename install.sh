@@ -20,27 +20,33 @@ NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
 sudo pacman -Syyu --needed \
-alacritty tmux wget clipmenu tree htop neofetch acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck dex network-manager-applet pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo arc-gtk-theme i3-wm i3status dmenu xss-lock feh picom imagemagick scrot vim emacs texlive-basic texlive-core texlive-bin texlive-latexextra texlive-langextra zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook jdk-openjdk rustup go nim gcc-ada ocaml dune coq hoogle doxygen wine wine-mono mingw-w64-binutils mingw-w64-gcc mingw-w64-crt mingw-w64-winpthreads mingw-w64-headers libx11 mesa mesa-utils libglvnd vulkan-icd-loader vulkan-intel vulkan-tools libvirt docker docker-compose otf-latin-modern otf-latinmodern-math noto-fonts noto-fonts-cjk noto-fonts-emoji pcmanfm chromium vlc reaper obs inkscape gimp qt6-multimedia-ffmpeg
+alacritty tmux wget clipmenu tree htop acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck dex network-manager-applet pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo arc-gtk-theme i3-wm i3status dmenu xss-lock feh picom imagemagick scrot vim emacs texlive-basic texlive-core texlive-bin texlive-latexextra texlive-langextra zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook jdk-openjdk rustup go nim gcc-ada ocaml dune coq hoogle doxygen libx11 mesa mesa-utils libvirt docker docker-compose otf-latin-modern otf-latinmodern-math noto-fonts noto-fonts-cjk noto-fonts-emoji pcmanfm chromium vlc
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
-curl -o ~/strap.sh https://blackarch.org/strap.sh
-echo 26849980b35a42e6e192c6d9ed8c46f0d6d06047 ~/strap.sh | sha1sum -c
-chmod +x ~/strap.sh
-sudo ~/strap.sh
-rm -rf ~/strap.sh
+curl -O https :// blackarch .org/strap.sh
+sha1sum strap.sh
+sudo chmod +x strap.sh
+sudo ./ strap.sh
+sudo pacman --needed 
+
 
 # DevKitPro setup
 echo -e "${GREEN}[INFO] - Post-install: Setting up DevKitPro${NC}"
 sudo pacman-key --recv BC26F752D25B92CE272E0F44F7FD5492264BB9D0 --keyserver keyserver.ubuntu.com
 sudo pacman-key --lsign BC26F752D25B92CE272E0F44F7FD5492264BB9D0
-wget https://pkg.devkitpro.org/devkitpro-keyring.pkg.tar.xz
-sudo pacman -U devkitpro-keyring.pkg.tar.xz
+
+echo "DEVKITPRO=/opt/devkitpro" | sudo tee -a ~/.profile
+echo "DEVKITARM=/opt/devkitpro/devkitARM" | sudo tee -a ~/.profile
+echo "DEVKITPROPPC=/opt/devkitpro/devkitPPC" | sudo tee -a ~/.profile
+
+sudo pacman -U https://pkg.devkitpro.org/devkitpro-keyring.pkg.tar.zst
+sudo pacman-key --populate devkitpro
+
 echo "[dkp-libs]" | sudo tee -a /etc/pacman.conf
 echo "Server = https://pkg.devkitpro.org/packages" | sudo tee -a /etc/pacman.conf
 echo "[dkp-linux]" | sudo tee -a /etc/pacman.conf
 echo "Server = https://pkg.devkitpro.org/packages/linux/\$arch" | sudo tee -a /etc/pacman.conf
-rm -rf devkitpro-keyring.pkg.tar.xz
 
 # System upgrade (optional: upgrade system packages and data)
 echo -e "${GREEN}[INFO] - Post-install: Upgrading system packages${NC}"
@@ -59,7 +65,6 @@ mkdir -p ~/code/
 mkdir -p ~/utils/
 mkdir -p ~/code/external
 mkdir -p ~/code/tools
-mkdir -p ~/software/aseprite
 
 # dotfiles setup
 echo -e "${GREEN}[INFO] - st: Downloading dotfiles${NC}"
@@ -94,35 +99,6 @@ cd ~/code/external/cc65
 # building without install and not in sudo mode
 make
 # Going back home
-cd ~
-
-# Aseprite setup
-echo -e "${GREEN}[INFO] - Aseprite: Downloading Aseprite${NC}"
-cd ~/software/aseprite 
-wget https://bonfi96.altervista.org/files/aseprites_builds/Aseprite_v1.1.5.6_LNX.zip
-unzip Aseprite_v1.1.5.6_LNX.zip
-rm -rf Aseprite_v1.1.5.6_LNX.zip
-chmod +x aseprite
-cd ~
-
-# fceux setup
-echo -e "${GREEN}[INFO] - FCEUX: Downloading FCEUX${NC}"
-git clone https://github.com/TASEmulators/fceux ~/code/tools/fceux
-echo -e "${GREEN}[INFO] - FCEUX: Building FCEUX${NC}"
-cd ~/code/tools/fceux
-cmake -Bbuild .
-cmake --build build
-cd ~
-
-# YY-CHR
-echo -e "${GREEN}[INFO] - YY-CHR: Downloading YY-CHR"
-cd ~/code/tools/
-mkdir yychr
-cd yychr
-wget https://dl.smwcentral.net/27208/yychr20210606.zip
-unzip yychr20210606.zip
-mv yychr20210606/* .
-rm -rf yychr20210606/ yychr20210606.zip
 cd ~
 
 # Setting up VIM
