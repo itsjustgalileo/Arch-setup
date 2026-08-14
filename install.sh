@@ -24,21 +24,20 @@ alacritty tmux wget clipmenu tree htop acpi unzip zip unrar arj p7zip ffmpeg ope
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
-curl -O https :// blackarch .org/strap.sh
+curl -O https://blackarch.org/strap.sh
 sha1sum strap.sh
 sudo chmod +x strap.sh
-sudo ./ strap.sh
-sudo pacman --needed 
-
+sudo ./strap.sh
+sudo pacman -S --needed blackarch-officials 
 
 # DevKitPro setup
 echo -e "${GREEN}[INFO] - Post-install: Setting up DevKitPro${NC}"
-sudo pacman-key --recv BC26F752D25B92CE272E0F44F7FD5492264BB9D0 --keyserver keyserver.ubuntu.com
-sudo pacman-key --lsign BC26F752D25B92CE272E0F44F7FD5492264BB9D0
-
 echo "DEVKITPRO=/opt/devkitpro" | sudo tee -a ~/.profile
 echo "DEVKITARM=/opt/devkitpro/devkitARM" | sudo tee -a ~/.profile
 echo "DEVKITPROPPC=/opt/devkitpro/devkitPPC" | sudo tee -a ~/.profile
+
+sudo pacman-key --recv BC26F752D25B92CE272E0F44F7FD5492264BB9D0 --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign BC26F752D25B92CE272E0F44F7FD5492264BB9D0
 
 sudo pacman -U https://pkg.devkitpro.org/devkitpro-keyring.pkg.tar.zst
 sudo pacman-key --populate devkitpro
