@@ -58,8 +58,6 @@ mkdir -p ~/code/pool
 echo -e "${GREEN}[INFO] - Cloning bump repos${NC}"
 echo -e "${GREEN}[INFO] - bump: Cloning x-roulette${NC}"
 git clone https://github.com/itsjustgalileo/x-roulette ~/code/pool/x-roulette
-echo -e "${GREEN}[INFO] - bump: Cloning progen${NC}"
-git clone https://github.com/itsjustgalileo/progen ~/code/pool/progen
 
 # Emacs setups
 echo -e "${ORANGE}[INFO] - FINISH EMACS SETUP AND CLOSE IT TO FINISH INSTALL"
