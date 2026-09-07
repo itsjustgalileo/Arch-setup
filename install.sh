@@ -20,7 +20,11 @@ NC='\033[0m'           # No Color
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
 sudo pacman -Syyu --needed \
-alacritty tmux wget clipmenu tree htop acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck dex network-manager-applet pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu xss-lock feh picom imagemagick scrot vim emacs texlive-basic texlive-core texlive-bin texlive-latexextra texlive-langextra zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook jdk-openjdk rustup go nim gcc-ada ocaml dune coq hoogle doxygen libx11 mesa mesa-utils libvirt docker docker-compose otf-latin-modern otf-latinmodern-math noto-fonts noto-fonts-cjk noto-fonts-emoji pcmanfm chromium vlc
+alacritty tmux wget clipmenu tree htop acpi unzip zip unrar arj p7zip ffmpeg openssh inetutils dhcpcd rsync mtools dosfstools xclip shellcheck dex network-manager-applet pulseaudio alsa-utils jack2 libwebp libxext xorg-server xorg-xinit xorg-xrandr xorg-xwininfo i3-wm i3status dmenu xss-lock feh picom imagemagick scrot vim emacs texlive-basic texlive-core texlive-bin texlive-latexextra texlive-langextra zathura zathura-pdf-mupdf tesseract-data-eng poppler poppler-glib git github-cli diff-so-fancy git-lfs llvm lldb gdb valgrind cmake ninja clang python3 ipython python-pip python-pipx jupyter-notebook jdk-openjdk rustup go gcc-ada ocaml dune coq hoogle doxygen libx11 mesa mesa-utils libvirt docker docker-compose otf-latin-modern otf-latinmodern-math noto-fonts noto-fonts-cjk noto-fonts-emoji pcmanfm vlc
+
+# Brave browser
+echo -e "${GREEN}[INFO] - Installing Brave${NC}"
+curl -fsS https://dl.brave.com/install.sh | sh
 
 # Black Arch
 echo -e "${GREEN}[INFO] - Running Black Arch Bootstrap${NC}"
@@ -55,8 +59,6 @@ sudo pacman --noconfirm -Syu
 echo -e "${GREEN}[INFO] - Post-install: Enabling systemd services${NC}"
 sudo systemctl enable --now docker
 sudo systemctl enable --now libvirtd
-# restarting binfmt for wine
-sudo systemctl restart systemd-binfmt
 
 # Creating ~/code/external directory
 echo -e "${GREEN}[INFO] - code: Making code directories${NC}"
@@ -72,13 +74,6 @@ git clone https://github.com/itsjustgalileo/dotfiles ~/code/dotfiles
 echo -e "${GREEN}[INFO] - dotfiles: Deploying dotfiles${NC}"
 chmod +x ~/code/dotfiles/deploy.sh
 ~/code/dotfiles/deploy.sh
-
-# Desktop zooming
-echo -e "${GREEN}[INFO] - OK BOOMER${NC}"
-git clone https://github.com/tsoding/boomer ~/utils/boomer
-cd ~/utils/boomer
-nimble build
-cd ~
 
 # Downloading NVM for node and npm management
 echo -e "${GREEN}[INFO] - Downloading NVM for JS setup${NC}"
