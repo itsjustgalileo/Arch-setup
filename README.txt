@@ -17,7 +17,7 @@ This assumes you have already installed Arch Linux x86_64:https://archlinux.org/
 - sof-firmware (required if new soundcard)
 - grub (or any bootloader)
 - efibootmgr (or any boot manager)
-- zsh (bash would do it too)
+- bash
 - vi (or any text editor)
 - man-db (optional)
 - man-pages (optional)
