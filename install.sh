@@ -115,6 +115,39 @@ echo "inoremap jk <Esc>" >> ~/.vim_runtime/my_configs.vim
 echo -e "${GREEN}[INFO] - VIM: Setting up colorscheme${NC}"
 echo "colorscheme protanopia" >> ~/.vim_runtime/my_configs.vim
 
+# Download Monaspace font
+URL='https://release-assets.githubusercontent.com/github-production-release-asset/696444975/4884e196-d554-4e46-94c5-41c6245ef3cf?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-07T14%3A48%3A42Z&rscd=attachment%3B+filename%3Dmonaspace-nerdfonts-v1.400.zip&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-07T13%3A48%3A07Z&ske=2026-09-07T14%3A48%3A42Z&sks=b&skv=2018-09-09&sig=Do%2FJnCMi4t2Rnl8sk3%2Bn6EjXuH4P73kA6KTu%2FFwyfik%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQucomIiwiZXhwIjoxNzg4NzkzNTQ1LCJuYmYiOjE3ODg3ODk5NDUsInBhdGgiOiJyZWxlYXNlYXNzZXRwcm9kdWN0aW9uLmJsb2IuY29yZS53aW5kb3dzLm5ldCJ9.eSyd4WP5kP6u2neSn8j4rJ4M256Ct3M8Jx2z7pWRwX4&response-content-disposition=attachment%3B%20filename%3Dmonaspace-nerdfonts-v1.400.zip&response-content-type=application%2Foctet-stream'
+
+FONT_DIR="$HOME/.local/share/fonts"
+TMP_DIR="$(mktemp -d)"
+ZIP_FILE="$TMP_DIR/monaspace-nerdfonts-v1.400.zip"
+
+cleanup() {
+    rm -rf "$TMP_DIR"
+}
+trap cleanup EXIT
+
+curl -fL "$URL" -o "$ZIP_FILE"
+
+unzip -q "$ZIP_FILE" -d "$TMP_DIR"
+
+mkdir -p "$FONT_DIR"
+
+find "$TMP_DIR/monaspace-nerdfonts-v1.400/NerdFonts" \
+    -type f \
+    \( -iname '*.ttf' -o -iname '*.otf' \) \
+    -exec cp -f {} "$FONT_DIR/" \;
+
+echo "Refreshing font cache..."
+fc-cache -f "$FONT_DIR"
+
+echo "Done!"
+echo
+echo "Installed fonts:"
+find "$FONT_DIR" -maxdepth 1 -type f \
+    \( -iname '*.ttf' -o -iname '*.otf' \) \
+    -printf '%f\n' | sort
+    
 # Refreshing fonts
 echo -r "${GREEN}[INFO] - Refreshing fonts${NC}"
 fc-cache -f -v
