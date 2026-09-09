@@ -12,11 +12,46 @@
 
 set -e
 
-# Color definitions
-RED='\033[0;31m'     # Green
-GREEN='\033[0;32m'     # Green
-ORANGE='\033[0;33m'    # Orange
-NC='\033[0m'           # No Color
+# Color definitions (taken from Color Bash Prompt HowTo).
+# Some colors might look different of some terminals.
+# For example, I see 'Bold Red' as 'orange' on my screen,
+# hence the 'Green' 'BRed' 'Red' sequence I often use in my prompt.
+
+
+# Normal Colors
+black='\e[0;30m'        # Black
+red='\e[0;31m'          # Red
+green='\e[0;32m'        # Green
+yellow='\e[0;33m'       # Yellow
+blue='\e[0;34m'         # Blue
+magenta='\e[0;35m'      # Magenta
+cyan='\e[0;36m'         # Cyan
+white='\e[0;37m'        # White
+
+# Bold
+BLACK='\e[1;30m'       # Black
+RED='\e[1;31m'         # Red
+GREEN='\e[1;32m'       # Green
+YELLOW='\e[1;33m'      # Yellow
+BLUE='\e[1;34m'        # Blue
+MAGENTA='\e[1;35m'     # Magenta
+CYAN='\e[1;36m'        # Cyan
+WHITE='\e[1;37m'       # White
+
+# Background
+Black='\e[40m'       # Black
+Red='\e[41m'         # Red
+Green='\e[42m'       # Green
+Yellow='\e[43m'      # Yellow
+Blue='\e[44m'        # Blue
+Magenta='\e[45m'     # Magenta
+Cyan='\e[46m'        # Cyan
+White='\e[47m'       # White
+
+NC="\e[m"               # Color Reset
+
+
+ALERT=${WHITE}${Red} # Bold White on red background
 
 echo -e "${GREEN}[INFO] - pacman: Downloading packages${NC}"
 sudo pacman -Syyu --needed \
@@ -81,7 +116,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 # Downloading Haskell tools (equivalent to rustup)
 echo -e "${GREEN}[INFO] - Downloading GHC up for Haskell setup${NC}"
-echo -e "${ORANGE}[WARNING] - Choose 'N' for zshrc modification and 'Y' for the rest"
+echo -e "${ORANGE}[WARNING] - Choose 'N' for bashrc modification and 'Y' for the rest"
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 # cc65 compiler toolchain for 65x cpu development
@@ -92,6 +127,24 @@ echo -e "${GREEN}[INFO] - cc65: Building cc65${NC}"
 cd ~/code/external/cc65
 # building without install and not in sudo mode
 make
+# Going back home
+cd ~
+
+echo -e "${GREEN}[INFO] - Nim: Building Nim${NC}"
+cd ~/code/external
+git clone https://github.com/nim-lang/Nim
+cd ./Nim
+./build_all.sh
+
+# Going back home
+cd ~
+
+echo -e "${GREEN}[INFO] - boomer: Builing boomer${NC}"
+cd ~/utils/
+git clone https://github.com/tsoding/boomer
+cd boomer
+~/code/external/Nim/bin/nimble build
+
 # Going back home
 cd ~
 
@@ -116,38 +169,8 @@ echo -e "${GREEN}[INFO] - VIM: Setting up colorscheme${NC}"
 echo "colorscheme protanopia" >> ~/.vim_runtime/my_configs.vim
 
 # Download Monaspace font
-URL='https://release-assets.githubusercontent.com/github-production-release-asset/696444975/4884e196-d554-4e46-94c5-41c6245ef3cf?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-07T14%3A48%3A42Z&rscd=attachment%3B+filename%3Dmonaspace-nerdfonts-v1.400.zip&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-07T13%3A48%3A07Z&ske=2026-09-07T14%3A48%3A42Z&sks=b&skv=2018-09-09&sig=Do%2FJnCMi4t2Rnl8sk3%2Bn6EjXuH4P73kA6KTu%2FFwyfik%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQucomIiwiZXhwIjoxNzg4NzkzNTQ1LCJuYmYiOjE3ODg3ODk5NDUsInBhdGgiOiJyZWxlYXNlYXNzZXRwcm9kdWN0aW9uLmJsb2IuY29yZS53aW5kb3dzLm5ldCJ9.eSyd4WP5kP6u2neSn8j4rJ4M256Ct3M8Jx2z7pWRwX4&response-content-disposition=attachment%3B%20filename%3Dmonaspace-nerdfonts-v1.400.zip&response-content-type=application%2Foctet-stream'
-
-FONT_DIR="$HOME/.local/share/fonts"
-TMP_DIR="$(mktemp -d)"
-ZIP_FILE="$TMP_DIR/monaspace-nerdfonts-v1.400.zip"
-
-cleanup() {
-    rm -rf "$TMP_DIR"
-}
-trap cleanup EXIT
-
-curl -fL "$URL" -o "$ZIP_FILE"
-
-unzip -q "$ZIP_FILE" -d "$TMP_DIR"
-
-mkdir -p "$FONT_DIR"
-
-find "$TMP_DIR/monaspace-nerdfonts-v1.400/NerdFonts" \
-    -type f \
-    \( -iname '*.ttf' -o -iname '*.otf' \) \
-    -exec cp -f {} "$FONT_DIR/" \;
-
-echo "Refreshing font cache..."
-fc-cache -f "$FONT_DIR"
-
-echo "Done!"
-echo
-echo "Installed fonts:"
-find "$FONT_DIR" -maxdepth 1 -type f \
-    \( -iname '*.ttf' -o -iname '*.otf' \) \
-    -printf '%f\n' | sort
-    
+echo -e "${YELLOW}[WARNING] - Please download and install Monaspace font from: ${NC}"
+echo -e "${YELLOW}[WARNING] - https://github.com/githubnext/monaspace ${NC}"
 # Refreshing fonts
 echo -r "${GREEN}[INFO] - Refreshing fonts${NC}"
 fc-cache -f -v
